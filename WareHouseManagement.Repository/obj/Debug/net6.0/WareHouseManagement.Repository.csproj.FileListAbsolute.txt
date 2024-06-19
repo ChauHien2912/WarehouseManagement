@@ -1,0 +1,14 @@
+D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\WareHouseManagement.Repository\bin\Debug\net6.0\WareHouseManagement.Repository.deps.json
+D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\WareHouseManagement.Repository\bin\Debug\net6.0\WareHouseManagement.Repository.runtimeconfig.json
+D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\WareHouseManagement.Repository\bin\Debug\net6.0\WareHouseManagement.Repository.dll
+D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\WareHouseManagement.Repository\bin\Debug\net6.0\WareHouseManagement.Repository.pdb
+D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\WareHouseManagement.Repository\obj\Debug\net6.0\WareHouseManagement.Repository.csproj.AssemblyReference.cache
+D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\WareHouseManagement.Repository\obj\Debug\net6.0\WareHouseManagement.Repository.GeneratedMSBuildEditorConfig.editorconfig
+D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\WareHouseManagement.Repository\obj\Debug\net6.0\WareHouseManagement.Repository.AssemblyInfoInputs.cache
+D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\WareHouseManagement.Repository\obj\Debug\net6.0\WareHouseManagement.Repository.AssemblyInfo.cs
+D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\WareHouseManagement.Repository\obj\Debug\net6.0\WareHouseManagement.Repository.csproj.CoreCompileInputs.cache
+D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\WareHouseManagement.Repository\obj\Debug\net6.0\WareHouseManagement.Repository.dll
+D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\WareHouseManagement.Repository\obj\Debug\net6.0\refint\WareHouseManagement.Repository.dll
+D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\WareHouseManagement.Repository\obj\Debug\net6.0\WareHouseManagement.Repository.pdb
+D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\WareHouseManagement.Repository\obj\Debug\net6.0\WareHouseManagement.Repository.genruntimeconfig.cache
+D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\WareHouseManagement.Repository\obj\Debug\net6.0\ref\WareHouseManagement.Repository.dll
