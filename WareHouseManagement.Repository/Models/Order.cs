@@ -8,6 +8,7 @@ namespace WareHouseManagement.Repository.Models
         public Order()
         {
             BatchOrders = new HashSet<BatchOrder>();
+            StaticFiles = new HashSet<StaticFile>();
         }
 
         public int Id { get; set; }
@@ -16,8 +17,10 @@ namespace WareHouseManagement.Repository.Models
         public decimal? Price { get; set; }
         public int? WarehouseId { get; set; }
         public DateTime? DeliveryDate { get; set; }
+        public string? Img { get; set; }
 
         public virtual Warehouse? Warehouse { get; set; }
         public virtual ICollection<BatchOrder> BatchOrders { get; set; }
+        public virtual ICollection<StaticFile> StaticFiles { get; set; }
     }
 }

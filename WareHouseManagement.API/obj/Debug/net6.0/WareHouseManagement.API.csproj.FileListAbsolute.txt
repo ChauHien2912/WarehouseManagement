@@ -69,3 +69,4 @@ D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\WareHouseManagement.API\bi
 D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\WareHouseManagement.API\bin\Debug\net6.0\WareHouseManagement.Repository.pdb
 D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\WareHouseManagement.API\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\WareHouseManagement.API\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll
+D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\WareHouseManagement.API\obj\Debug\net6.0\WareHouseManagement.API.sourcelink.json

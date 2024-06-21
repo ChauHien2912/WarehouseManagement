@@ -4,8 +4,9 @@ using System.Linq;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
-
 using WareHouseManagement.Repository.Models;
+
+//using WareHouseManagement.Repository.Models;
 
 
 namespace WareHouseManagement.Repository.Repository

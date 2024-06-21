@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using WareHouseManagement.Repository.Dtos.Request.Authen;
 using WareHouseManagement.Repository.Dtos.Response.Authen;
 using WareHouseManagement.Repository.Models;
+
+//using WareHouseManagement.Repository.Models;
 using WareHouseManagement.Repository.Repository;
 using WareHouseManagement.Repository.Services.IServices;
 
@@ -70,6 +72,7 @@ namespace WareHouseManagement.Repository.Services.Services
             }
             Warehouse warehouse = await _uof.GetRepository<Warehouse>().SingleOrDefaultAsync(predicate: x => x.AccountId == account.Id);
             Shipper shipper = await _uof.GetRepository<Shipper>().SingleOrDefaultAsync(predicate: x => x.AccountId == account.Id);
+            Admin admin = await _uof.GetRepository<Admin>().SingleOrDefaultAsync(predicate: x => x.AccountId == account.Id);
             if (warehouse == null && shipper == null)
             {
                 throw new Exception("Không tìm thấy tài khoản");
@@ -98,7 +101,8 @@ namespace WareHouseManagement.Repository.Services.Services
                 AccountId = account.Id,
                 RoleName = account.Role?.RoleName,
                 ShipperResponse = shipper != null ? _mapper.Map<ShipperLoginResponse>(shipper) : null,
-                WarehouseResponse = warehouse != null ? _mapper.Map<WarehouseLoginResponse>(warehouse) : null
+                WarehouseResponse = warehouse != null ? _mapper.Map<WarehouseLoginResponse>(warehouse) : null,
+                AdminResponse = admin != null ? _mapper.Map<AdminLoginResponse>(admin) : null,
             };
         }
 
@@ -115,7 +119,7 @@ namespace WareHouseManagement.Repository.Services.Services
         private string GenerateToken(string username, string roleName)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_config["JWTSettings:Key"]);
+            var key = Encoding.ASCII.GetBytes(_config["JWT:Key"]);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {

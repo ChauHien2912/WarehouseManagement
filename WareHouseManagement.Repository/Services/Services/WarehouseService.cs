@@ -9,6 +9,8 @@ using WareHouseManagement.Repository.Dtos.Request.WareHouse;
 using WareHouseManagement.Repository.Dtos.Response.Shipper;
 using WareHouseManagement.Repository.Dtos.Response.WareHouse;
 using WareHouseManagement.Repository.Models;
+
+//using WareHouseManagement.Repository.Models;
 using WareHouseManagement.Repository.Repository;
 using WareHouseManagement.Repository.Services.IServices;
 using WareHouseManagement.Repository.Specifications;
@@ -72,6 +74,9 @@ namespace WareHouseManagement.Repository.Services.Services
             };
             return paginateResponse;
         }
+    
+
+      
 
         public async Task<bool> UpdateWarehouseById(int id, UpdateWarehouseRequest updateWarehouseRequest)
         {

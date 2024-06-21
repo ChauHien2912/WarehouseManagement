@@ -12,3 +12,4 @@ D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\WareHouseManagement.Reposi
 D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\WareHouseManagement.Repository\obj\Debug\net6.0\WareHouseManagement.Repository.pdb
 D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\WareHouseManagement.Repository\obj\Debug\net6.0\WareHouseManagement.Repository.genruntimeconfig.cache
 D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\WareHouseManagement.Repository\obj\Debug\net6.0\ref\WareHouseManagement.Repository.dll
+D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\WareHouseManagement.Repository\obj\Debug\net6.0\WareHouseManagement.Repository.sourcelink.json

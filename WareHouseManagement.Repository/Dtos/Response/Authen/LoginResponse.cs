@@ -20,8 +20,17 @@ namespace WareHouseManagement.Repository.Dtos.Response.Authen
         public ShipperLoginResponse ShipperResponse { get; set; }
         public WarehouseLoginResponse WarehouseResponse { get; set; }
 
+        public AdminLoginResponse AdminResponse { get; set; }
+
     }
 
+
+    public class AdminLoginResponse
+    {
+        public int Id { get; set; }
+        public int? AccountId { get; set; }
+        
+    }
     public class ShipperLoginResponse
     {
         public int Id { get; set; }

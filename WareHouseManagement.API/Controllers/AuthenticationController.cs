@@ -23,7 +23,7 @@ namespace WareHouseManagement.API.Controllers
         // POST api/user/login
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody] LoginAccountRepuest loginRequest)
+        public async Task<IActionResult> Login([FromBody]LoginAccountRepuest loginRequest)
         {
             try
             {

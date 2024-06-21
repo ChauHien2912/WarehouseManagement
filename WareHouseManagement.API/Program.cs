@@ -3,10 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using WareHouseManagement.API.Configuration;
-using WareHouseManagement.Repository.Models;
+//using WareHouseManagement.Repository.Models;
 using WareHouseManagement.Repository.Helper;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using BirthdayParty.WebApi.Constants;
+using WareHouseManagement.Repository.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);

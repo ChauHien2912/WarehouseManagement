@@ -24,6 +24,7 @@ namespace WareHouseManagement.Repository.Models
         public virtual DbSet<RefreshTokenAccount> RefreshTokenAccounts { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Shipper> Shippers { get; set; } = null!;
+        public virtual DbSet<StaticFile> StaticFiles { get; set; } = null!;
         public virtual DbSet<Truck> Trucks { get; set; } = null!;
         public virtual DbSet<Warehouse> Warehouses { get; set; } = null!;
 
@@ -59,7 +60,7 @@ namespace WareHouseManagement.Repository.Models
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.Accounts)
                     .HasForeignKey(d => d.RoleId)
-                    .HasConstraintName("FK__Account__role_id__3A81B327");
+                    .HasConstraintName("FK__Account__role_id__38996AB5");
             });
 
             modelBuilder.Entity<Admin>(entity =>
@@ -73,7 +74,7 @@ namespace WareHouseManagement.Repository.Models
                 entity.HasOne(d => d.Account)
                     .WithMany(p => p.Admins)
                     .HasForeignKey(d => d.AccountId)
-                    .HasConstraintName("FK__Admin__account_i__3D5E1FD2");
+                    .HasConstraintName("FK__Admin__account_i__3B75D760");
             });
 
             modelBuilder.Entity<Batch>(entity =>
@@ -95,17 +96,17 @@ namespace WareHouseManagement.Repository.Models
                 entity.HasOne(d => d.Shipper)
                     .WithMany(p => p.Batches)
                     .HasForeignKey(d => d.ShipperId)
-                    .HasConstraintName("FK__Batch__shipper_i__4AB81AF0");
+                    .HasConstraintName("FK__Batch__shipper_i__4D94879B");
 
                 entity.HasOne(d => d.Truck)
                     .WithMany(p => p.Batches)
                     .HasForeignKey(d => d.TruckId)
-                    .HasConstraintName("FK__Batch__truck_id__4CA06362");
+                    .HasConstraintName("FK__Batch__truck_id__4F7CD00D");
 
                 entity.HasOne(d => d.Warehouse)
                     .WithMany(p => p.Batches)
                     .HasForeignKey(d => d.WarehouseId)
-                    .HasConstraintName("FK__Batch__warehouse__4BAC3F29");
+                    .HasConstraintName("FK__Batch__warehouse__4E88ABD4");
             });
 
             modelBuilder.Entity<BatchOrder>(entity =>
@@ -121,12 +122,12 @@ namespace WareHouseManagement.Repository.Models
                 entity.HasOne(d => d.Batch)
                     .WithMany(p => p.BatchOrders)
                     .HasForeignKey(d => d.BatchId)
-                    .HasConstraintName("FK__Batch_Ord__batch__52593CB8");
+                    .HasConstraintName("FK__Batch_Ord__batch__5EBF139D");
 
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.BatchOrders)
                     .HasForeignKey(d => d.OrderId)
-                    .HasConstraintName("FK__Batch_Ord__order__534D60F1");
+                    .HasConstraintName("FK__Batch_Ord__order__5FB337D6");
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -143,6 +144,8 @@ namespace WareHouseManagement.Repository.Models
                     .HasColumnType("date")
                     .HasColumnName("expected_date_of_delivery");
 
+                entity.Property(e => e.Img).HasColumnName("img");
+
                 entity.Property(e => e.OrderDate)
                     .HasColumnType("datetime")
                     .HasColumnName("order_date");
@@ -156,7 +159,7 @@ namespace WareHouseManagement.Repository.Models
                 entity.HasOne(d => d.Warehouse)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.WarehouseId)
-                    .HasConstraintName("FK__Order__warehouse__4F7CD00D");
+                    .HasConstraintName("FK__Order__warehouse__5BE2A6F2");
             });
 
             modelBuilder.Entity<RefreshTokenAccount>(entity =>
@@ -183,7 +186,7 @@ namespace WareHouseManagement.Repository.Models
                     .WithMany(p => p.RefreshTokenAccounts)
                     .HasForeignKey(d => d.AccountId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__refresh_t__accou__66603565");
+                    .HasConstraintName("FK__refresh_t__accou__5629CD9C");
             });
 
             modelBuilder.Entity<Role>(entity =>
@@ -230,6 +233,27 @@ namespace WareHouseManagement.Repository.Models
                     .WithMany(p => p.Shippers)
                     .HasForeignKey(d => d.WarehouseId)
                     .HasConstraintName("FK__Shipper__warehou__47DBAE45");
+            });
+
+            modelBuilder.Entity<StaticFile>(entity =>
+            {
+                entity.ToTable("static_file");
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id");
+
+                entity.Property(e => e.Img).HasColumnName("img");
+
+                entity.Property(e => e.OrderId).HasColumnName("order_id");
+
+                entity.Property(e => e.Video).HasColumnName("video");
+
+                entity.HasOne(d => d.Order)
+                    .WithMany(p => p.StaticFiles)
+                    .HasForeignKey(d => d.OrderId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__static_fi__order__628FA481");
             });
 
             modelBuilder.Entity<Truck>(entity =>

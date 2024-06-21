@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WareHouseManagement.API", "WareHouseManagement.API\WareHouseManagement.API.csproj", "{2ABA88C0-F7CE-4A90-BCCA-916F0E7B0AEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WareHouseManagement.API", "WareHouseManagement.API\WareHouseManagement.API.csproj", "{2ABA88C0-F7CE-4A90-BCCA-916F0E7B0AEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WareHouseManagement.Repository", "WareHouseManagement.Repository\WareHouseManagement.Repository.csproj", "{CC79F30E-A0C4-41BB-9B1C-472A3C5E3B52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WareHouseManagement.Repository", "WareHouseManagement.Repository\WareHouseManagement.Repository.csproj", "{CC79F30E-A0C4-41BB-9B1C-472A3C5E3B52}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{30FE3955-DA88-4EB0-879D-D2AADD204FF8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{CC79F30E-A0C4-41BB-9B1C-472A3C5E3B52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC79F30E-A0C4-41BB-9B1C-472A3C5E3B52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC79F30E-A0C4-41BB-9B1C-472A3C5E3B52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30FE3955-DA88-4EB0-879D-D2AADD204FF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30FE3955-DA88-4EB0-879D-D2AADD204FF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30FE3955-DA88-4EB0-879D-D2AADD204FF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30FE3955-DA88-4EB0-879D-D2AADD204FF8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

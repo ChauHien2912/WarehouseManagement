@@ -1,12 +1,13 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WareHouseManagement.API.Constant;
 using WareHouseManagement.Repository.Dtos.Request.Account;
 using WareHouseManagement.Repository.Services.IServices;
 
 namespace WareHouseManagement.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route(APIEndPointConstant.Account.AccountEndPoint + "/[action]")]
     [ApiController]
     public class AccountController : BaseController
     {
