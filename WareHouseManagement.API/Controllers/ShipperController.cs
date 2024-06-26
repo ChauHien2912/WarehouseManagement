@@ -19,7 +19,7 @@ namespace WareHouseManagement.API.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> GetShipperById([FromRoute]int id)
+        public async Task<IActionResult> GetShipperById([FromRoute]Guid id)
         {
             try
             {

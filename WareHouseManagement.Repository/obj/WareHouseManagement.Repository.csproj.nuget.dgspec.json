@@ -49,6 +49,14 @@
               "target": "Package",
               "version": "[13.0.1, )"
             },
+            "EPPlus": {
+              "target": "Package",
+              "version": "[6.2.19, )"
+            },
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.2.2, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.22, )"

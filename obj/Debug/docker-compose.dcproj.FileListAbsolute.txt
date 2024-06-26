@@ -32,3 +32,9 @@ D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\bin\Debug\WareHouseManagem
 D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\obj\Debug\docker-compose.dcproj.AssemblyReference.cache
 D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache
 D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\obj\Debug\docker-compose.dcproj.CopyComplete
+D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\bin\Debug\EPPlus.dll
+D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\bin\Debug\EPPlus.Interfaces.dll
+D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\bin\Debug\EPPlus.System.Drawing.dll
+D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\bin\Debug\System.Security.Cryptography.Pkcs.dll
+D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\bin\Debug\Microsoft.IO.RecyclableMemoryStream.dll
+D:\FPT\Sum2024\SWD392_ReLearn\WareHouseManagement.API\bin\Debug\System.Drawing.Common.dll

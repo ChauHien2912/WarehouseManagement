@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 using WareHouseManagement.Repository.Dtos.Request.Account;
 using WareHouseManagement.Repository.Dtos.Response.Account;
 using WareHouseManagement.Repository.Dtos.Response.User;
+using WareHouseManagement.Repository.Entities;
 using WareHouseManagement.Repository.Enum;
-using WareHouseManagement.Repository.Models;
 
-//using WareHouseManagement.Repository.Models;
+
 using WareHouseManagement.Repository.Repository;
 using WareHouseManagement.Repository.Services.IServices;
 
@@ -31,7 +31,7 @@ namespace WareHouseManagement.Repository.Services.Services
             _mapper = mapper;
         }
 
-        public async Task<bool> ChangePassword(int id, ChangedPasswordRequest changePasswordRequest)
+        public async Task<bool> ChangePassword(Guid id, ChangedPasswordRequest changePasswordRequest)
         {
             var account = await _uof.GetRepository<Account>().SingleOrDefaultAsync(predicate: x => x.Id == id);
             if (!changePasswordRequest.CurrentPassword.Equals(account.Password))
@@ -43,7 +43,7 @@ namespace WareHouseManagement.Repository.Services.Services
             return await _uof.CommitAsync() > 0;
         }
 
-        public async Task<bool> DeleteAccountById(int id)
+        public async Task<bool> DeleteAccountById(Guid id)
         {
             var account = await _uof.GetRepository<Account>().SingleOrDefaultAsync(predicate: x => x.Id == id);
             account.IsActive = false;
@@ -51,7 +51,7 @@ namespace WareHouseManagement.Repository.Services.Services
             return await _uof.CommitAsync() > 0;
         }
 
-        public async Task<GetAccountResponse> GetAccountById(int id)
+        public async Task<GetAccountResponse> GetAccountById(Guid id)
         {
             GetAccountResponse response = new GetAccountResponse();
             Account account = await _uof
@@ -109,14 +109,17 @@ namespace WareHouseManagement.Repository.Services.Services
             if (RoleEnum.Shipper.ToString().Equals(createAccountRequest.RoleName))
             {
                 var userInfor = _mapper.Map<Shipper>(createAccountRequest);
+                account.Id = Guid.NewGuid();
                 account.RoleId = role.Id;
                 account.IsActive = true;
+                userInfor.Id = Guid.NewGuid();
                 userInfor.AccountId = account.Id;
                 await _uof.GetRepository<Shipper>().InsertAsync(userInfor);
             }
             else if (RoleEnum.Warehouse.ToString().Equals(createAccountRequest.RoleName))
             {
                 var warehouse = _mapper.Map<Warehouse>(createAccountRequest);
+                account.Id = Guid.NewGuid();
                 account.RoleId = role.Id;
                 account.IsActive = true;
                 warehouse.AccountId = account.Id;
@@ -127,7 +130,5 @@ namespace WareHouseManagement.Repository.Services.Services
 
             return _mapper.Map(createAccountRequest, createAccountResponse);
         }
-
-        
     }
 }

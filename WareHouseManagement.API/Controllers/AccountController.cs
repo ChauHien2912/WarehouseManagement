@@ -40,8 +40,8 @@ namespace WareHouseManagement.API.Controllers
         
 
         [HttpPut]
-        [Route("{id}")]
-        public async Task<IActionResult> ChangePassword([FromRoute] int id, [FromBody] ChangedPasswordRequest changePasswordRequest)
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> ChangePassword([FromRoute] Guid id, [FromBody] ChangedPasswordRequest changePasswordRequest)
         {
             try
             {
@@ -59,8 +59,8 @@ namespace WareHouseManagement.API.Controllers
         }
 
         [HttpDelete]
-        [Route("{id}")]
-        public async Task<IActionResult> DeleteAccount([FromRoute] int id)
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> DeleteAccount([FromRoute] Guid id)
         {
             try
             {
@@ -77,8 +77,8 @@ namespace WareHouseManagement.API.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
-        public async Task<IActionResult> GetAccountById([FromRoute]int id)
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> GetAccountById([FromRoute]Guid id)
         {
             try
             {

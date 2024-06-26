@@ -12,6 +12,6 @@ namespace WareHouseManagement.Repository.Services.IServices
     {
         Task<IPaginate<GetShipperResponse>> GetShippers(int page, int size);
 
-        Task<GetShipperResponse> GetShipperById(int id);
+        Task<GetShipperResponse> GetShipperById(Guid id);
     }
 }

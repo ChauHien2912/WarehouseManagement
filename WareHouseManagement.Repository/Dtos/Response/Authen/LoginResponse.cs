@@ -13,7 +13,7 @@ namespace WareHouseManagement.Repository.Dtos.Response.Authen
 
         public string RefreshToken { get; set; }
 
-        public int AccountId { get; set; }
+        public Guid AccountId { get; set; }
         
         public string RoleName { get; set; }
 
@@ -27,25 +27,25 @@ namespace WareHouseManagement.Repository.Dtos.Response.Authen
 
     public class AdminLoginResponse
     {
-        public int Id { get; set; }
-        public int? AccountId { get; set; }
+        public Guid Id { get; set; }
+        public Guid? AccountId { get; set; }
         
     }
     public class ShipperLoginResponse
     {
-        public int Id { get; set; }
-        public int? AccountId { get; set; }
+        public Guid Id { get; set; }
+        public Guid? AccountId { get; set; }
         public string? FullName { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public bool? Gender { get; set; }
         public string? Phone { get; set; }
-        public int? WarehouseId { get; set; }
+        public Guid? WarehouseId { get; set; }
     }
 
     public class WarehouseLoginResponse
     {
-        public int Id { get; set; }
-        public int? AccountId { get; set; }
+        public Guid Id { get; set; }
+        public Guid? AccountId { get; set; }
         public string? Name { get; set; }
         public string? Phone { get; set; }
         public string? Location { get; set; }

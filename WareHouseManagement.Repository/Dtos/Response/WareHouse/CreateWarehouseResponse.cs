@@ -8,7 +8,7 @@ namespace WareHouseManagement.Repository.Dtos.Response.WareHouse
 {
     public class CreateWarehouseResponse
     {
-        public int? AccountId { get; set; }
+        public Guid? AccountId { get; set; }
         public string? Name { get; set; }
         public string? Phone { get; set; }
         public string? Location { get; set; } = null;

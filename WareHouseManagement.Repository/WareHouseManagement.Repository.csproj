@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="EPPlus" Version="6.2.19" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.22" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.22">
       <PrivateAssets>all</PrivateAssets>
@@ -25,7 +27,6 @@
   <ItemGroup>
     <Folder Include="Dtos\Request\Truck\" />
     <Folder Include="Dtos\Request\Shipper\" />
-    <Folder Include="Dtos\Response\Order\" />
     <Folder Include="Dtos\Response\Batch\" />
     <Folder Include="Dtos\Response\Truck\" />
   </ItemGroup>

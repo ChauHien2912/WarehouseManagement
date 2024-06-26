@@ -10,7 +10,7 @@ namespace WareHouseManagement.Repository.Dtos.Response.Shipper
     {
         public GetShipperResponse() { }
 
-        public GetShipperResponse(int id, int? accountId, string? fullName, DateTime? dateOfBirth, bool? gender, string? phone, int? warehouseId)
+        public GetShipperResponse(Guid id, int? accountId, string? fullName, DateTime? dateOfBirth, bool? gender, string? phone, Guid? warehouseId)
         {
             Id = id;
             AccountId = accountId;
@@ -21,12 +21,12 @@ namespace WareHouseManagement.Repository.Dtos.Response.Shipper
             WarehouseId = warehouseId;
         }
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public int? AccountId { get; set; }
         public string? FullName { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public bool? Gender { get; set; }
         public string? Phone { get; set; }
-        public int? WarehouseId { get; set; }
+        public Guid? WarehouseId { get; set; }
     }
 }

@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WareHouseManagement.Repository.Dtos.Request.User;
 using WareHouseManagement.Repository.Dtos.Response.User;
-using WareHouseManagement.Repository.Models;
+using WareHouseManagement.Repository.Entities;
 using WareHouseManagement.Repository.Repository;
 using WareHouseManagement.Repository.Specifications;
 
@@ -33,7 +33,7 @@ namespace WareHouseManagement.Repository.Services.IServices
             _mapper = mapper;
         }
 
-        public async Task<bool> ChangedPass(int id, string oldPass, string newPass)
+        public async Task<bool> ChangedPass(Guid id, string oldPass, string newPass)
         {
             bool isUpdate = false;
             var existing = await _uow.GetRepository<Account>().SingleOrDefaultAsync(predicate: e => e.Id == id);
@@ -51,7 +51,7 @@ namespace WareHouseManagement.Repository.Services.IServices
             return isUpdate;
         }
 
-        public async Task<bool> DeleteUser(int id)
+        public async Task<bool> DeleteUser(Guid id)
         {
             var existing = await _uow.GetRepository<Account>().SingleOrDefaultAsync(predicate: e => e.Id == id);
             if (existing == null)
@@ -129,7 +129,7 @@ namespace WareHouseManagement.Repository.Services.IServices
             } 
         }
 
-        public async Task<bool> UpdateUser(int id, UpdateUserRequest request)
+        public async Task<bool> UpdateUser(Guid id, UpdateUserRequest request)
         {
             var existing = await _uow.GetRepository<Account>().SingleOrDefaultAsync(predicate: e => e.Id == id);
             if (existing == null)
