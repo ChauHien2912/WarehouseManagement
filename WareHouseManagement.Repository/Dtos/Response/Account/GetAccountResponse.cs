@@ -11,7 +11,7 @@ namespace WareHouseManagement.Repository.Dtos.Response.User
     {
         public GetAccountResponse() { }
 
-        public GetAccountResponse(int id, string? email, string? password, int? roleId, bool? isActive)
+        public GetAccountResponse(Guid id, string? email, string? password, Guid? roleId, bool? isActive)
         {
             Id = id;
             Email = email;
@@ -20,10 +20,10 @@ namespace WareHouseManagement.Repository.Dtos.Response.User
             IsActive = isActive;
         }
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string? Email { get; set; }
         public string? Password { get; set; }
-        public int? RoleId { get; set; }
+        public Guid? RoleId { get; set; }
         public bool? IsActive { get; set; }
 
     }

@@ -8,7 +8,7 @@ namespace WareHouseManagement.Repository.Dtos.Request.User
 {
     public class CreateUserRequest
     {
-        public int? RoleId { get; set; }
+        public Guid? RoleId { get; set; }
         public string FullName { get; set; } = null!;
         public string? Gender { get; set; }
         public DateTime? Dob { get; set; }

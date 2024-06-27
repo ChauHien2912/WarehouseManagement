@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using WareHouseManagement.Repository.Dtos.Request.WareHouse;
 using WareHouseManagement.Repository.Dtos.Response.Shipper;
 using WareHouseManagement.Repository.Dtos.Response.WareHouse;
-using WareHouseManagement.Repository.Models;
+using WareHouseManagement.Repository.Entities;
 
 //using WareHouseManagement.Repository.Models;
 using WareHouseManagement.Repository.Repository;
@@ -17,7 +17,7 @@ using WareHouseManagement.Repository.Specifications;
 
 namespace WareHouseManagement.Repository.Services.Services
 {
-    public class WarehouseService :     IWarehouseService
+    public class WarehouseService : IWarehouseService
     {
         private readonly IUnitOfWork _uof;
         private readonly IConfiguration _config;
@@ -32,7 +32,7 @@ namespace WareHouseManagement.Repository.Services.Services
 
         
 
-        public async Task<bool> DeleteWarehouseById(int id)
+        public async Task<bool> DeleteWarehouseById(Guid id)
         {
             var existing = await _uof.GetRepository<Warehouse>().SingleOrDefaultAsync(predicate: e => e.Id == id);
             if (existing == null)
@@ -44,7 +44,7 @@ namespace WareHouseManagement.Repository.Services.Services
             return isDeleted;
         }
 
-        public async Task<GetWarehouseResponse>? GetWarehouseById(int id)
+        public async Task<GetWarehouseResponse>? GetWarehouseById(Guid id)
         {
             try
             {
@@ -78,7 +78,7 @@ namespace WareHouseManagement.Repository.Services.Services
 
       
 
-        public async Task<bool> UpdateWarehouseById(int id, UpdateWarehouseRequest updateWarehouseRequest)
+        public async Task<bool> UpdateWarehouseById(Guid id, UpdateWarehouseRequest updateWarehouseRequest)
         {
             var WarehouseInfor = await _uof.GetRepository<Warehouse>().SingleOrDefaultAsync(predicate: x => x.Id == id);
             if (WarehouseInfor == null)

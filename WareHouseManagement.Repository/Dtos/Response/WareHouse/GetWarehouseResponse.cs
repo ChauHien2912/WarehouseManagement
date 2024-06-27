@@ -10,7 +10,7 @@ namespace WareHouseManagement.Repository.Dtos.Response.WareHouse
     {
         public GetWarehouseResponse() { }
 
-        public GetWarehouseResponse(int id, int? accountId, string? name, string? phone, string? location)
+        public GetWarehouseResponse(Guid id, int? accountId, string? name, string? phone, string? location)
         {
             Id = id;
             AccountId = accountId;
@@ -19,7 +19,7 @@ namespace WareHouseManagement.Repository.Dtos.Response.WareHouse
             Location = location;
         }
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public int? AccountId { get; set; }
         public string? Name { get; set; }
         public string? Phone { get; set; }

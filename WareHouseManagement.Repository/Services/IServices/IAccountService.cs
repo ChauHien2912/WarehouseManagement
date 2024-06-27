@@ -12,8 +12,8 @@ namespace WareHouseManagement.Repository.Services.IServices
     public interface IAccountService
     {
         Task<CreateAccountResponse> RegisterAccount(CreateAccountRequest createAccountRequest);
-        Task<bool> DeleteAccountById(int id);
-        Task<bool> ChangePassword(int id, ChangedPasswordRequest changePasswordRequest);
-        Task<GetAccountResponse> GetAccountById(int id);
+        Task<bool> DeleteAccountById(Guid id);
+        Task<bool> ChangePassword(Guid id, ChangedPasswordRequest changePasswordRequest);
+        Task<GetAccountResponse> GetAccountById(Guid id);
     }
 }

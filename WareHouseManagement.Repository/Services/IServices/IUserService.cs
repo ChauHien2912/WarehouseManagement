@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WareHouseManagement.Repository.Dtos.Request.User;
 using WareHouseManagement.Repository.Dtos.Response.User;
-using WareHouseManagement.Repository.Models;
+using WareHouseManagement.Repository.Entities;
 
 //using WareHouseManagement.Repository.Models;
 using WareHouseManagement.Repository.Specifications;
@@ -24,11 +24,11 @@ namespace WareHouseManagement.Repository.Services.IServices
         public Task<bool> RegisterAccount(CreateUserRequest request);
 
 
-        public Task<bool> DeleteUser(int id);
+        public Task<bool> DeleteUser(Guid id);
 
-        public Task<bool> UpdateUser(int id, UpdateUserRequest request);
+        public Task<bool> UpdateUser(Guid id, UpdateUserRequest request);
 
-        public Task<bool> ChangedPass(int id, string oldPass, string newPass);
+        public Task<bool> ChangedPass(Guid id, string oldPass, string newPass);
 
 
         Task<IPaginate<GetAccountResponse>> GetAccountAsync(int page, int size);

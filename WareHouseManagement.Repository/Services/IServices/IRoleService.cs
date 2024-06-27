@@ -14,9 +14,9 @@ namespace WareHouseManagement.Repository.Services.IServices
     public interface IRoleService
     {
         Task<bool> CreateRole(CreateRoleRequest request);
-        Task<bool> UpdateRoleById(int id, UpdateRoleRequest request);
+        Task<bool> UpdateRoleById(Guid id, UpdateRoleRequest request);
 
-        Task DeleteRole(int id);
+        Task DeleteRole(Guid id);
 
         Task<IPaginate<RoleResponse>> GetRoles(int page, int size);
     }

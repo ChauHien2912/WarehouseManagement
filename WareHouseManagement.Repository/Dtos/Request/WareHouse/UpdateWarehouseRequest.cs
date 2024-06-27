@@ -8,7 +8,7 @@ namespace WareHouseManagement.Repository.Dtos.Request.WareHouse
 {
     public class UpdateWarehouseRequest
     {
-        public int? AccountId { get; set; }
+        public Guid? AccountId { get; set; }
         public string? Name { get; set; }
         public string? Phone { get; set; }
         public string? Location { get; set; }

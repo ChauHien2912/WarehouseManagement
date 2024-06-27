@@ -29,7 +29,12 @@
         }
         public static class Warehouse
         {
-            public const string WarehouseEndpoint = ApiEndpoint + "/warehouse";
+            public const string WarehouseEndpoint = ApiEndpoint + "/warehouses";
+        }
+
+        public static class Order
+        {
+            public const string OrderEndpoint = ApiEndpoint + "/orders";
         }
 
     }

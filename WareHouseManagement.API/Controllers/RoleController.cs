@@ -36,8 +36,8 @@ namespace WareHouseManagement.API.Controllers
         }
 
         [HttpPut]
-        [Route("{id:int}")]
-        public async Task<IActionResult> UpdateRole(int id, [FromQuery]UpdateRoleRequest request)
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> UpdateRole(Guid id, [FromQuery]UpdateRoleRequest request)
         {
             bool result = await _service.UpdateRoleById(id, request);
             if(result == false)
@@ -48,8 +48,8 @@ namespace WareHouseManagement.API.Controllers
         }
 
         [HttpDelete]
-        [Route("{id:int}")]
-        public async Task<IActionResult> DeleteRole(int id)
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> DeleteRole(Guid id)
         {
             var result = _service.DeleteRole(id);
             return Ok(result);

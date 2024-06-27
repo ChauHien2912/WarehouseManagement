@@ -6,7 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WareHouseManagement.Repository.Dtos.Response.Shipper;
-using WareHouseManagement.Repository.Models;
+using WareHouseManagement.Repository.Entities;
+
 
 //using WareHouseManagement.Repository.Models;
 using WareHouseManagement.Repository.Repository;
@@ -28,7 +29,7 @@ namespace WareHouseManagement.Repository.Services.Services
             _mapper = mapper;
         }
 
-        public async Task<GetShipperResponse> GetShipperById(int id)
+        public async Task<GetShipperResponse> GetShipperById(Guid id)
         {
             try
             {

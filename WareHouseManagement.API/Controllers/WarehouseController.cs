@@ -19,79 +19,79 @@ namespace WareHouseManagement.API.Controllers
         }
 
 
-        [HttpGet]
-        [Route("{id}")]
-        public async Task<IActionResult> GetWarehouseById([FromRoute]int id)
-        {
-            try
-            {
-                var result = await _warehouseService.GetWarehouseById(id);
-                if(result == null)
-                {
-                    return NotFound();
-                }
-                return Ok(result);
-            }catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
+        //[HttpGet]
+        //[Route("{id}")]
+        //public async Task<IActionResult> GetWarehouseById([FromRoute]int id)
+        //{
+        //    try
+        //    {
+        //        var result = await _warehouseService.GetWarehouseById(id);
+        //        if(result == null)
+        //        {
+        //            return NotFound();
+        //        }
+        //        return Ok(result);
+        //    }catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //}
 
-        [HttpDelete]
-        [Route("{id}")]
-        public async Task<IActionResult> DeleteWarehouseById([FromRoute] int id)
-        {
-            try
-            {
-                var result = await _warehouseService.DeleteWarehouseById(id);
-                if (result == null)
-                {
-                    return NotFound();
-                }
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
+        //[HttpDelete]
+        //[Route("{id}")]
+        //public async Task<IActionResult> DeleteWarehouseById([FromRoute] int id)
+        //{
+        //    try
+        //    {
+        //        var result = await _warehouseService.DeleteWarehouseById(id);
+        //        if (result == null)
+        //        {
+        //            return NotFound();
+        //        }
+        //        return Ok(result);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //}
 
-        [HttpGet]
+        //[HttpGet]
         
-        public async Task<IActionResult> GetWarehouses(int page, int size)
-        {
-            try
-            {
-                var result = await _warehouseService.GetWarehouses(page, size);
-                if (result == null)
-                {
-                    return NotFound();
-                }
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
+        //public async Task<IActionResult> GetWarehouses(int page, int size)
+        //{
+        //    try
+        //    {
+        //        var result = await _warehouseService.GetWarehouses(page, size);
+        //        if (result == null)
+        //        {
+        //            return NotFound();
+        //        }
+        //        return Ok(result);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //}
 
-        [HttpPut]
-        [Route("{int}")]
-        public async Task<IActionResult> UpdateWarehouse([FromRoute]int id, UpdateWarehouseRequest request)
-        {
-            try
-            {
-                var result = await _warehouseService.UpdateWarehouseById(id, request);
-                if (result == null)
-                {
-                    return NotFound();
-                }
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
+        //[HttpPut]
+        //[Route("{int}")]
+        //public async Task<IActionResult> UpdateWarehouse([FromRoute]int id, UpdateWarehouseRequest request)
+        //{
+        //    try
+        //    {
+        //        var result = await _warehouseService.UpdateWarehouseById(id, request);
+        //        if (result == null)
+        //        {
+        //            return NotFound();
+        //        }
+        //        return Ok(result);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //}
     }
 }

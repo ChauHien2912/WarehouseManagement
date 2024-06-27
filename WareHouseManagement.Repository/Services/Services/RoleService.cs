@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WareHouseManagement.Repository.Dtos.Request.Role;
 using WareHouseManagement.Repository.Dtos.Response.Role;
-using WareHouseManagement.Repository.Models;
+using WareHouseManagement.Repository.Entities;
 
 //using WareHouseManagement.Repository.Models;
 using WareHouseManagement.Repository.Repository;
@@ -54,7 +54,7 @@ namespace WareHouseManagement.Repository.Services.Services
             return isStatus;
         }
 
-        public async Task DeleteRole(int id)
+        public async Task DeleteRole(Guid id)
         {
             var existingRole = await _uow.GetRepository<Role>().SingleOrDefaultAsync(predicate: e => e.Id == id);
             if (existingRole == null)
@@ -82,7 +82,7 @@ namespace WareHouseManagement.Repository.Services.Services
             return roleresponse;
         }
 
-        public async Task<bool> UpdateRoleById(int id,UpdateRoleRequest request)
+        public async Task<bool> UpdateRoleById(Guid id,UpdateRoleRequest request)
         {
             var existingRole = await _uow.GetRepository<Role>().SingleOrDefaultAsync(predicate: e => e.Id == id);
             if (existingRole == null)

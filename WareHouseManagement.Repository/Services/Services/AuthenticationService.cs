@@ -12,9 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WareHouseManagement.Repository.Dtos.Request.Authen;
 using WareHouseManagement.Repository.Dtos.Response.Authen;
-using WareHouseManagement.Repository.Models;
-
-//using WareHouseManagement.Repository.Models;
+using WareHouseManagement.Repository.Entities;
 using WareHouseManagement.Repository.Repository;
 using WareHouseManagement.Repository.Services.IServices;
 
@@ -52,10 +50,10 @@ namespace WareHouseManagement.Repository.Services.Services
             }
             return new FetchUserResponse()
             {
-                AccountId = account.Id,
+                //AccountId = account.I,
                 RoleName = account.Role?.RoleName,
                 ShipperResponse = shipper != null ? _mapper.Map<ShipperLoginResponse>(shipper) : null,
-                WarehouseResponse = warehouse!= null ? _mapper.Map<WarehouseLoginResponse>(warehouse) : null
+                WarehouseResponse = warehouse != null ? _mapper.Map<WarehouseLoginResponse>(warehouse) : null
             };
         }
 

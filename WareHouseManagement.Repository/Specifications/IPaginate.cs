@@ -13,5 +13,7 @@ namespace WareHouseManagement.Repository.Specifications
         int Total { get; }
         int TotalPages { get; }
         IList<TResult> Items { get; }
+
+        
     }
 }
