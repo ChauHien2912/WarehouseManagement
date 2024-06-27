@@ -22,6 +22,7 @@ namespace WareHouseManagement.API.Configuration
             services.AddScoped<IWarehouseService, WarehouseService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IMediaService, MediaService>();
             return services;    
         }
 
