@@ -10,7 +10,7 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["WareHouseManagement.API/WareHouseManagement.API.csproj", "WareHouseManagement.API/"]
 COPY ["WareHouseManagement.Repository/WareHouseManagement.Repository.csproj", "WareHouseManagement.Repository/"]
-RUN dotnet restore "./WareHouseManagement.API/./WareHouseManagement.API.csproj"
+RUN dotnet restore "./WareHouseManagement.API/WareHouseManagement.API.csproj"
 COPY . .
 WORKDIR "/src/WareHouseManagement.API"
 RUN dotnet build "./WareHouseManagement.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
