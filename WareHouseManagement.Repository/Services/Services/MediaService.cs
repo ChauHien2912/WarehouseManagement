@@ -33,7 +33,7 @@ namespace WareHouseManagement.Repository.Services.Services
             {
                 throw new NotFoundException("No file uploaded.");
             }
-
+            //ABC XYZ
             if (!file.ContentType.ToLower().StartsWith("image/"))
             {
                 throw new Exception("File is not a image!");
