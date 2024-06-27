@@ -22,12 +22,10 @@ ehthumbs.db
 # =====================================
 [Ee]xported[Oo]bj/
 *.userprefs
-*.csproj
 *.DotSettings
 *.pidb
 *.suo
 *.sln
-*.user
 *.unityproj
 *.booproj
 .consulo/
