@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -45,9 +46,13 @@ namespace WareHouseManagement.Repository.Services.Services
             }
         }
 
-        public async Task<IPaginate<GetShipperResponse>> GetShippers(int page, int size)
+        public async Task<IPaginate<GetShipperResponse>> GetShippers(Guid warehouseid,int page, int size)
         {
-            var shippers = await _uof.GetRepository<Shipper>().GetPagingListAsync(page: page, size: size);
+            var shippers = await _uof.GetRepository<Shipper>().GetPagingListAsync(
+                predicate: p => p.Id == warehouseid,
+                page: page, size: size,
+                include: i => i.Include(p => p.Warehouse)
+                );
             var paginateResponse = new Paginate<GetShipperResponse>
             {
                 Page = shippers.Page,

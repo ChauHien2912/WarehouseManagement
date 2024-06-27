@@ -123,6 +123,10 @@ namespace WareHouseManagement.Repository.Services.Services
                 account.RoleId = role.Id;
                 account.IsActive = true;
                 warehouse.AccountId = account.Id;
+                warehouse.Id = Guid.NewGuid();
+                warehouse.Location = createAccountRequest.Location;
+                warehouse.Name = createAccountRequest.FullName;
+                warehouse.Phone = createAccountRequest.Phone;
                 await _uof.GetRepository<Warehouse>().InsertAsync(warehouse);
             }
             await _uof.GetRepository<Account>().InsertAsync(account);

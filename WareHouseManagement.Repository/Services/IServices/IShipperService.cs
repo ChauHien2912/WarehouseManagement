@@ -10,7 +10,7 @@ namespace WareHouseManagement.Repository.Services.IServices
 {
     public interface IShipperService
     {
-        Task<IPaginate<GetShipperResponse>> GetShippers(int page, int size);
+        Task<IPaginate<GetShipperResponse>> GetShippers(Guid warehouseid, int page, int size);
 
         Task<GetShipperResponse> GetShipperById(Guid id);
     }

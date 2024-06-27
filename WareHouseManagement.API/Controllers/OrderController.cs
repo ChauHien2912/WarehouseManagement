@@ -72,5 +72,44 @@ namespace WareHouseManagement.API.Controllers
             }
         }
 
+        [HttpPut]
+        [Route("{warehouseid:Guid}")]
+        public async Task<IActionResult> UpdateBatchModeByWarehouse([FromRoute] Guid warehouseid)
+        {
+            try
+            {
+                var result = await _service.UpdataBatchModeByWarehouse(warehouseid);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok($"Bạn đã nhập thành công {result} hàng vào kho");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("{shipperid:Guid}")]
+        public async Task<IActionResult> GetOrderByShipperid([FromRoute] Guid shipperid, int page = 1, int size = 10)
+        {
+            try
+            {
+                var result = await _service.GetOrderByShipper(shipperid, page, size);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
     }
 }

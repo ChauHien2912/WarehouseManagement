@@ -10,22 +10,22 @@
 
         public static class Role
         {
-            public const string RoleEndPoint = ApiEndpoint + "/role";
+            public const string RoleEndPoint = ApiEndpoint + "/roles";
         }
 
         public static class Authentication
         {
-            public const string AuthenEndPoint = ApiEndpoint + "/authentication";
+            public const string AuthenEndPoint = ApiEndpoint + "/authentications";
         }
 
         public static class Account
         {
-            public const string AccountEndPoint = ApiEndpoint + "/account";
+            public const string AccountEndPoint = ApiEndpoint + "/accounts";
         }
 
         public static class Shipper
         {
-            public const string ShipperEndpoint = ApiEndpoint + "/shipper";
+            public const string ShipperEndpoint = ApiEndpoint + "/shippers";
         }
         public static class Warehouse
         {

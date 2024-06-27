@@ -17,6 +17,10 @@ namespace WareHouseManagement.Repository.Services.IServices
 
         Task<GetOrderResponse> GetOrderById(Guid id);
 
+        Task<int> UpdataBatchModeByWarehouse(Guid warehouseid);
 
+        Task<IPaginate<GetOrderResponse>> GetOrderByShipper(Guid shipperid, int page, int size);
+
+        
     }
 }

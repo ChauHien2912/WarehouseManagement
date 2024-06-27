@@ -18,6 +18,7 @@ namespace WareHouseManagement.Repository.Dtos.Request.Account
         public string? Phone { get; set; }
         public Guid? WarehouseId { get; set; }
 
+        public string Location { get; set; }
 
 
     }

@@ -36,11 +36,12 @@ namespace WareHouseManagement.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetShippers(int page, int size)
+        [Route("{warehouseid:Guid}")]
+        public async Task<IActionResult> GetShippers([FromRoute]Guid warehouseid,int page, int size)
         {
             try
             {
-                var result = await _shipperservice.GetShippers(page, size);
+                var result = await _shipperservice.GetShippers(warehouseid, page, size);
                 if(result == null)
                 {
                     return NotFound();

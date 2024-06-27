@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileSystemGlobbing;
 using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,6 +54,7 @@ namespace WareHouseManagement.Repository.Services.Services
                         {
                             var order = new Order
                             {
+                                Id = Guid.NewGuid(),
                                 OrderDate = worksheet.Cells[row, 1].GetValue<DateTime>(),
                                 ExpectedDateOfDelivery = worksheet.Cells[row, 2].GetValue<DateTime>(),
                                 Price = worksheet.Cells[row, 3].GetValue<decimal>(),
@@ -66,23 +68,24 @@ namespace WareHouseManagement.Repository.Services.Services
                 }
 
                 var shippers = await _uow.GetRepository<Shipper>().GetListAsync(predicate: s => s.WarehouseId == request.WarehouseId);
-                var shipperList = shippers.ToList(); // Chuyển đổi sang List<Shipper>
+                var shipperList = shippers.ToList(); 
                 if (!shipperList.Any())
                 {
-                    return false; // Không có shipper nào trong warehouse
+                    return false;
                 }
 
-                int shipperIndex = 0; // Biến chỉ mục để theo dõi shipper hiện tại
+                int shipperIndex = 0; 
 
                 foreach (var order in orders)
                 {
-                    // Chọn shipper theo chỉ mục
+                    
                     var shipper = shipperList[shipperIndex];
 
-                    // Create a new batch
+
                     var batch = new Batch
                     {
-                        ShipperId = shipper.Id,
+                        Id = Guid.NewGuid(),
+                        ShipperId = null,
                         WarehouseId = request.WarehouseId,
                         BatchMode = "truckin"
                     };
@@ -91,6 +94,7 @@ namespace WareHouseManagement.Repository.Services.Services
                     // Create a new batch order
                     var batchOrder = new BatchOrder
                     {
+                        Id = Guid.NewGuid(),
                         OrderId = order.Id,
                         BatchId = batch.Id
                     };
@@ -124,6 +128,22 @@ namespace WareHouseManagement.Repository.Services.Services
 
         }
 
+        public async Task<IPaginate<GetOrderResponse>> GetOrderByShipper(Guid shipperid, int page, int size)
+        {
+            var orders = await _uow.GetRepository<BatchOrder>().GetPagingListAsync(predicate: p => p.Batch.ShipperId == shipperid,
+                page: page, size: size, include: i => i.Include(o => o.Order)
+                );
+            var orderResponses = new Paginate<GetOrderResponse>()
+            {
+                Page = orders.Page,
+                Size = orders.Size,
+                Total = orders.Total,
+                TotalPages = orders.TotalPages,
+                Items = _mapper.Map<IList<GetOrderResponse>>(orders.Items),
+            };
+            return orderResponses;
+        }
+
         public async Task<IPaginate<GetOrderResponse>> GetOrders(int page, int size)
         {
             var orders = await _uow.GetRepository<Order>().GetPagingListAsync(page: page, size: size);
@@ -139,5 +159,41 @@ namespace WareHouseManagement.Repository.Services.Services
             return orderResponses;
 
         }
+
+        public async Task<int> UpdataBatchModeByWarehouse(Guid warehouseid)
+        {
+            // Lấy danh sách shipper trong kho
+            var shippers = await _uow.GetRepository<Shipper>().GetListAsync(predicate: p => p.WarehouseId == warehouseid);
+            var shipperList = shippers.ToList();
+            if (!shipperList.Any())
+            {
+                return 0; // Nếu không có shipper nào trong kho, trả về 0
+            }
+
+            // Lấy danh sách batch có BatchMode là "truckin" trong kho
+            List<Batch> batches = (List<Batch>)await _uow.GetRepository<Batch>().GetListAsync(predicate: b => b.WarehouseId == warehouseid && b.BatchMode == "truckin");
+
+            // Đếm số lượng batch đã cập nhật
+            int updatedBatchCount = 0;
+
+            // Phân chia đều các batch cho các shipper
+            int shipperIndex = 0;
+            foreach (var batch in batches)
+            {
+                batch.BatchMode = "imported"; // Cập nhật trạng thái của batch
+                batch.ShipperId = shipperList[shipperIndex].Id; // Gán batch cho shipper
+                shipperIndex = (shipperIndex + 1) % shipperList.Count; // Di chuyển đến shipper tiếp theo
+                 _uow.GetRepository<Batch>().UpdateAsync(batch);
+                updatedBatchCount++; // Tăng biến đếm
+            }
+
+            // Lưu các thay đổi vào cơ sở dữ liệu
+            await _uow.CommitAsync();
+
+            return updatedBatchCount; // Trả về số lượng batch đã cập nhật
+        }
+    }
+
+
     }
 }
