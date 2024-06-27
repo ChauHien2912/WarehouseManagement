@@ -68,17 +68,17 @@ namespace WareHouseManagement.Repository.Services.Services
                 }
 
                 var shippers = await _uow.GetRepository<Shipper>().GetListAsync(predicate: s => s.WarehouseId == request.WarehouseId);
-                var shipperList = shippers.ToList(); 
+                var shipperList = shippers.ToList();
                 if (!shipperList.Any())
                 {
                     return false;
                 }
 
-                int shipperIndex = 0; 
+                int shipperIndex = 0;
 
                 foreach (var order in orders)
                 {
-                    
+
                     var shipper = shipperList[shipperIndex];
 
 
@@ -120,7 +120,7 @@ namespace WareHouseManagement.Repository.Services.Services
         public async Task<GetOrderResponse> GetOrderById(Guid id)
         {
             var order = await _uow.GetRepository<Order>().SingleOrDefaultAsync(predicate: o => o.Id == id);
-            if(order == null)
+            if (order == null)
             {
                 throw new Exception("Order Not Found");
             }
@@ -183,7 +183,7 @@ namespace WareHouseManagement.Repository.Services.Services
                 batch.BatchMode = "imported"; // Cập nhật trạng thái của batch
                 batch.ShipperId = shipperList[shipperIndex].Id; // Gán batch cho shipper
                 shipperIndex = (shipperIndex + 1) % shipperList.Count; // Di chuyển đến shipper tiếp theo
-                 _uow.GetRepository<Batch>().UpdateAsync(batch);
+                _uow.GetRepository<Batch>().UpdateAsync(batch);
                 updatedBatchCount++; // Tăng biến đếm
             }
 
@@ -195,5 +195,4 @@ namespace WareHouseManagement.Repository.Services.Services
     }
 
 
-    }
 }
