@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WareHouseManagement.API.Constant;
+using WareHouseManagement.Repository.Dtos.Request.Shippper;
 using WareHouseManagement.Repository.Services.IServices;
 
 namespace WareHouseManagement.API.Controllers
@@ -52,5 +53,44 @@ namespace WareHouseManagement.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPut]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> UpdateShipperById([FromRoute]Guid id, UpdateShipperRequest request)
+        {
+            try
+            {
+                var result = await _shipperservice.UpdateShipper(id, request);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> DeleteShipperbyId([FromRoute] Guid id)
+        {
+            try
+            {
+                var result = await _shipperservice.DeleteShipperById(id);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }

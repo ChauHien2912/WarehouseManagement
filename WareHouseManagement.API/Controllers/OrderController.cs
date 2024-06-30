@@ -110,6 +110,133 @@ namespace WareHouseManagement.API.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<IActionResult> UpdateBatchModebyShipper([FromForm]UpdateBactchModeRequest request)
+        {
+            try
+            {
+                var result = await _service.UpdateBatchModeByShipper(request);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
+
+        [HttpGet]
+        public async Task<IActionResult> GetOrderImported([FromQuery] int page = 1, [FromQuery] int size = 10)
+        {
+            try
+            {
+                var result = await _service.GetOrderImported(page, size);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetOrderTruckOut([FromQuery] int page = 1, [FromQuery] int size = 10)
+        {
+            try
+            {
+                var result = await _service.GetOrderTruckOut(page, size);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetOrderFail([FromQuery] int page = 1, [FromQuery] int size = 10)
+        {
+            try
+            {
+                var result = await _service.GetOrderFail(page, size);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetOrderSuccess([FromQuery] int page = 1, [FromQuery] int size = 10)
+        {
+            try
+            {
+                var result = await _service.GetOrderSuccess(page, size);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> GetOrderDelivering([FromQuery] int page = 1, [FromQuery] int size = 10)
+        {
+            try
+            {
+                var result = await _service.GetOrderDeliveing(page, size);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> GetOrderTruckin([FromQuery] int page = 1, [FromQuery] int size = 10)
+        {
+            try
+            {
+                var result = await _service.GetOrderTruckIn(page, size);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

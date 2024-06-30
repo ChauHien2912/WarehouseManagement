@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,15 @@ namespace WareHouseManagement.Repository.Services.IServices
 
         Task<IPaginate<GetOrderResponse>> GetOrderByShipper(Guid shipperid, int page, int size);
 
-        
+        Task<bool> UpdateBatchModeByShipper(UpdateBactchModeRequest request);
+
+        Task<IPaginate<GetOrderResponse>> GetOrderTruckOut(int page, int size);
+        Task<IPaginate<GetOrderResponse>> GetOrderImported(int page, int size);
+        Task<IPaginate<GetOrderResponse>> GetOrderDeliveing(int page, int size);
+        Task<IPaginate<GetOrderResponse>> GetOrderSuccess(int page, int size);
+        Task<IPaginate<GetOrderResponse>> GetOrderFail(int page, int size);
+
+        Task<IPaginate<GetOrderResponse>> GetOrderTruckIn(int page, int size);
+
     }
 }

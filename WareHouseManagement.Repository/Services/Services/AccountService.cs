@@ -11,8 +11,6 @@ using WareHouseManagement.Repository.Dtos.Response.Account;
 using WareHouseManagement.Repository.Dtos.Response.User;
 using WareHouseManagement.Repository.Entities;
 using WareHouseManagement.Repository.Enum;
-
-
 using WareHouseManagement.Repository.Repository;
 using WareHouseManagement.Repository.Services.IServices;
 
@@ -133,6 +131,25 @@ namespace WareHouseManagement.Repository.Services.Services
             await _uof.CommitAsync();
 
             return _mapper.Map(createAccountRequest, createAccountResponse);
+        }
+
+        public async Task<bool> UpdateAccount(Guid id, UpdateAccountRequest updateAccountRequest)
+        {
+            var existaccount = await _uof.GetRepository<Account>().SingleOrDefaultAsync(
+            predicate: e => e.Id == id);
+
+            if (existaccount == null)
+            {
+                throw new Exception("Cannot Find Voucher");
+            }
+
+            existaccount = _mapper.Map<Account>(updateAccountRequest);
+            existaccount.Id = id;
+            _uof.GetRepository<Account>().UpdateAsync(existaccount);
+            bool isUpdate = await _uof.CommitAsync() > 0;
+            return isUpdate;
+
+
         }
     }
 }

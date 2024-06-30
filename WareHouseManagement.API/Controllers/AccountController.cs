@@ -94,5 +94,24 @@ namespace WareHouseManagement.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPut]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> UpdateAccountById([FromRoute] Guid id, UpdateAccountRequest request)
+        {
+            try
+            {
+                var accooutReponse = await _accountService.UpdateAccount(id, request);
+                if (accooutReponse == null)
+                {
+                    return BadRequest("Cannot find this account!");
+                }
+                return Ok(accooutReponse);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

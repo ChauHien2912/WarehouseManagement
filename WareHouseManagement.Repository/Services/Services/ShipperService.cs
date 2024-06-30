@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WareHouseManagement.Repository.Dtos.Request.Shippper;
 using WareHouseManagement.Repository.Dtos.Response.Shipper;
 using WareHouseManagement.Repository.Entities;
 
@@ -28,6 +29,28 @@ namespace WareHouseManagement.Repository.Services.Services
             _uof = uof;
             _config = config;
             _mapper = mapper;
+        }
+
+        public async Task<bool> DeleteShipperById(Guid id)
+        {
+            var shipper = await _uof.GetRepository<Shipper>().SingleOrDefaultAsync(predicate: p => p.Id == id);
+            var accountid = shipper.AccountId;
+            if(shipper == null)
+            {
+                throw new Exception("Cannot Find Shipper");
+            }
+            if(accountid == null)
+            {
+                throw new Exception("Cannot find account");
+            }
+            var account = await _uof.GetRepository<Account>().SingleOrDefaultAsync(predicate: p =>  p.Id == accountid);
+
+             _uof.GetRepository<Shipper>().DeleteAsync(shipper);
+             _uof.GetRepository<Account>().DeleteAsync(account);
+            bool isDeleted = await _uof.CommitAsync() > 0;
+            return isDeleted;
+
+
         }
 
         public async Task<GetShipperResponse> GetShipperById(Guid id)
@@ -62,6 +85,20 @@ namespace WareHouseManagement.Repository.Services.Services
                 Items = _mapper.Map<IList<GetShipperResponse>>(shippers.Items)
             };
             return paginateResponse;
+        }
+
+        public async Task<bool> UpdateShipper(Guid id, UpdateShipperRequest request)
+        {
+            var shipper = await _uof.GetRepository<Shipper>().SingleOrDefaultAsync(predicate: p => p.Id == id);
+            if(shipper == null)
+            {
+                return false;
+            }
+            shipper = _mapper.Map<Shipper>(request);
+            shipper.Id = id;
+            _uof.GetRepository<Shipper>().UpdateAsync(shipper);
+            bool isUpdated = await _uof.CommitAsync() > 0;
+            return isUpdated;
         }
     }
 }

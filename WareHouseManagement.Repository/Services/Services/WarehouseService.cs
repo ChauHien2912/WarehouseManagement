@@ -39,7 +39,9 @@ namespace WareHouseManagement.Repository.Services.Services
             {
                 throw new Exception("Cannot Find Warehouse");
             }
+            var accountid = await _uof.GetRepository<Account>().SingleOrDefaultAsync(predicate: e => e.Id == existing.AccountId);
             _uof.GetRepository<Warehouse>().DeleteAsync(existing);
+            _uof.GetRepository<Account>().DeleteAsync(accountid);
             bool isDeleted = await _uof.CommitAsync() > 0;
             return isDeleted;
         }

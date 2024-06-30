@@ -15,5 +15,12 @@ namespace WareHouseManagement.Repository.Dtos.Response.Order
         public Guid? WarehouseId { get; set; }
         public DateTime? DeliveryDate { get; set; }
         public string? Img { get; set; }
+
+        // Additional properties for Batch information
+        public string? BatchMode { get; set; }
+        public Guid? ShipperId { get; set; }
+        public Guid? BatchId { get; set; }
+
+
     }
 }

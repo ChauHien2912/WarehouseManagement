@@ -27,6 +27,11 @@ namespace WareHouseManagement.Repository.Helper
         public AutoMapperProfile() {
 
 
+            //Account
+
+            CreateMap<Shipper, GetAccountResponse>().ReverseMap();
+            CreateMap<Warehouse, GetAccountResponse>().ReverseMap();
+
             // Role 
             CreateMap<Role, RoleResponse>().ReverseMap();
             CreateMap<Role, UpdateRoleRequest>().ReverseMap();
@@ -63,6 +68,18 @@ namespace WareHouseManagement.Repository.Helper
 
             //Order
             CreateMap<Order, GetOrderResponse>().ReverseMap();
+            //CreateMap<BatchOrder, GetOrderResponse>().ReverseMap();
+            CreateMap<BatchOrder, GetOrderResponse>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Order.Id))
+            .ForMember(dest => dest.OrderDate, opt => opt.MapFrom(src => src.Order.OrderDate))
+            .ForMember(dest => dest.ExpectedDateOfDelivery, opt => opt.MapFrom(src => src.Order.ExpectedDateOfDelivery))
+            .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Order.Price))
+            .ForMember(dest => dest.WarehouseId, opt => opt.MapFrom(src => src.Order.WarehouseId))
+            .ForMember(dest => dest.DeliveryDate, opt => opt.MapFrom(src => src.Order.DeliveryDate))
+            .ForMember(dest => dest.Img, opt => opt.MapFrom(src => src.Order.Img))
+            .ForMember(dest => dest.BatchMode, opt => opt.MapFrom(src => src.Batch.BatchMode))
+            .ForMember(dest => dest.ShipperId, opt => opt.MapFrom(src => src.Batch.ShipperId))
+            .ForMember(dest => dest.BatchId, opt => opt.MapFrom(src => src.BatchId));
         }
     }
 }

@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Dtos\Request\Shipper\**" />
+    <Compile Remove="Dtos\Request\Truck\**" />
+    <EmbeddedResource Remove="Dtos\Request\Shipper\**" />
+    <EmbeddedResource Remove="Dtos\Request\Truck\**" />
+    <None Remove="Dtos\Request\Shipper\**" />
+    <None Remove="Dtos\Request\Truck\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="CloudinaryDotNet" Version="1.26.2" />
     <PackageReference Include="EPPlus" Version="6.2.19" />
@@ -27,8 +36,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\Request\Truck\" />
-    <Folder Include="Dtos\Request\Shipper\" />
     <Folder Include="Dtos\Response\Batch\" />
     <Folder Include="Dtos\Response\Truck\" />
   </ItemGroup>

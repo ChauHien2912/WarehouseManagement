@@ -32,7 +32,7 @@ namespace WareHouseManagement.Repository.Entities
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=172.28.160.1,1455;User ID=sa;Password=Admin@123;Database=OrderManagement;Trusted_Connection=False;TrustServerCertificate=true;");
+                optionsBuilder.UseSqlServer("Server=172.28.160.1,1455;User ID=sa;Password=Admin@123;Database=OrderManagement;Trusted_Connection=False;TrustServerCertificate=True;");
             }
         }
 
@@ -61,7 +61,7 @@ namespace WareHouseManagement.Repository.Entities
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.Accounts)
                     .HasForeignKey(d => d.RoleId)
-                    .HasConstraintName("FK__Account__role_id__534D60F1");
+                    .HasConstraintName("FK__Account__role_id__47DBAE45");
             });
 
             modelBuilder.Entity<Admin>(entity =>
@@ -81,7 +81,7 @@ namespace WareHouseManagement.Repository.Entities
                 entity.HasOne(d => d.Account)
                     .WithMany(p => p.Admins)
                     .HasForeignKey(d => d.AccountId)
-                    .HasConstraintName("FK__Admin__account_i__5441852A");
+                    .HasConstraintName("FK__Admin__account_i__49C3F6B7");
             });
 
             modelBuilder.Entity<Batch>(entity =>
@@ -96,6 +96,10 @@ namespace WareHouseManagement.Repository.Entities
                     .HasMaxLength(50)
                     .HasColumnName("batch_mode");
 
+                entity.Property(e => e.DateModifiedBatchMode).HasColumnType("date");
+
+                entity.Property(e => e.Img).HasColumnName("img");
+
                 entity.Property(e => e.ShipperId).HasColumnName("shipper_id");
 
                 entity.Property(e => e.WarehouseId).HasColumnName("warehouse_id");
@@ -103,12 +107,12 @@ namespace WareHouseManagement.Repository.Entities
                 entity.HasOne(d => d.Shipper)
                     .WithMany(p => p.Batches)
                     .HasForeignKey(d => d.ShipperId)
-                    .HasConstraintName("FK__Batch__shipper_i__5535A963");
+                    .HasConstraintName("FK__Batch__shipper_i__4BAC3F29");
 
                 entity.HasOne(d => d.Warehouse)
                     .WithMany(p => p.Batches)
                     .HasForeignKey(d => d.WarehouseId)
-                    .HasConstraintName("FK__Batch__warehouse__5629CD9C");
+                    .HasConstraintName("FK__Batch__warehouse__4D94879B");
             });
 
             modelBuilder.Entity<BatchOrder>(entity =>
@@ -126,12 +130,12 @@ namespace WareHouseManagement.Repository.Entities
                 entity.HasOne(d => d.Batch)
                     .WithMany(p => p.BatchOrders)
                     .HasForeignKey(d => d.BatchId)
-                    .HasConstraintName("FK__Batch_Ord__batch__571DF1D5");
+                    .HasConstraintName("FK__Batch_Ord__batch__4F7CD00D");
 
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.BatchOrders)
                     .HasForeignKey(d => d.OrderId)
-                    .HasConstraintName("FK__Batch_Ord__order__5812160E");
+                    .HasConstraintName("FK__Batch_Ord__order__5165187F");
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -165,7 +169,7 @@ namespace WareHouseManagement.Repository.Entities
                 entity.HasOne(d => d.Warehouse)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.WarehouseId)
-                    .HasConstraintName("FK__Order__warehouse__59063A47");
+                    .HasConstraintName("FK__Order__warehouse__534D60F1");
             });
 
             modelBuilder.Entity<RefreshTokenAccount>(entity =>
@@ -192,7 +196,7 @@ namespace WareHouseManagement.Repository.Entities
                     .WithMany(p => p.RefreshTokenAccounts)
                     .HasForeignKey(d => d.AccountId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__refresh_t__accou__59FA5E80");
+                    .HasConstraintName("FK__refresh_t__accou__5535A963");
             });
 
             modelBuilder.Entity<Role>(entity =>
@@ -237,12 +241,12 @@ namespace WareHouseManagement.Repository.Entities
                 entity.HasOne(d => d.Account)
                     .WithMany(p => p.Shippers)
                     .HasForeignKey(d => d.AccountId)
-                    .HasConstraintName("FK__Shipper__account__5AEE82B9");
+                    .HasConstraintName("FK__Shipper__account__571DF1D5");
 
                 entity.HasOne(d => d.Warehouse)
                     .WithMany(p => p.Shippers)
                     .HasForeignKey(d => d.WarehouseId)
-                    .HasConstraintName("FK__Shipper__warehou__5BE2A6F2");
+                    .HasConstraintName("FK__Shipper__warehou__59063A47");
             });
 
             modelBuilder.Entity<StaticFile>(entity =>
@@ -263,7 +267,7 @@ namespace WareHouseManagement.Repository.Entities
                     .WithMany(p => p.StaticFiles)
                     .HasForeignKey(d => d.OrderId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__static_fi__order__6A30C649");
+                    .HasConstraintName("FK__static_fi__order__5AEE82B9");
             });
 
             modelBuilder.Entity<Warehouse>(entity =>
@@ -291,7 +295,7 @@ namespace WareHouseManagement.Repository.Entities
                 entity.HasOne(d => d.Account)
                     .WithMany(p => p.Warehouses)
                     .HasForeignKey(d => d.AccountId)
-                    .HasConstraintName("FK__Warehouse__accou__5DCAEF64");
+                    .HasConstraintName("FK__Warehouse__accou__5BE2A6F2");
             });
 
             OnModelCreatingPartial(modelBuilder);
