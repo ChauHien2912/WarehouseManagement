@@ -22,6 +22,7 @@ D:\SWD_Suppoter\MAIN_PROJECT\WarehouseManagement\WareHouseManagement.Repository\
 D:\SWD_Suppoter\MAIN_PROJECT\WarehouseManagement\WareHouseManagement.Repository\obj\Debug\net6.0\WareHouseManagement.Repository.dll
 D:\SWD_Suppoter\MAIN_PROJECT\WarehouseManagement\WareHouseManagement.Repository\obj\Debug\net6.0\refint\WareHouseManagement.Repository.dll
 D:\SWD_Suppoter\MAIN_PROJECT\WarehouseManagement\WareHouseManagement.Repository\obj\Debug\net6.0\WareHouseManagement.Repository.pdb
+<<<<<<< HEAD
 D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\WareHouseManagement.Repository\bin\Debug\net6.0\WareHouseManagement.Repository.deps.json
 D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\WareHouseManagement.Repository\bin\Debug\net6.0\WareHouseManagement.Repository.runtimeconfig.json
 D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\WareHouseManagement.Repository\bin\Debug\net6.0\WareHouseManagement.Repository.dll
@@ -37,3 +38,11 @@ D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\WareHouseM
 D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\WareHouseManagement.Repository\obj\Debug\net6.0\WareHouseManagement.Repository.pdb
 D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\WareHouseManagement.Repository\obj\Debug\net6.0\WareHouseManagement.Repository.genruntimeconfig.cache
 D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\WareHouseManagement.Repository\obj\Debug\net6.0\ref\WareHouseManagement.Repository.dll
+=======
+D:\SWD_Suppoter\MAIN_PROJECT\WarehouseManagement\WareHouseManagement.Repository\bin\Debug\net6.0\WareHouseManagement.Repository.deps.json
+D:\SWD_Suppoter\MAIN_PROJECT\WarehouseManagement\WareHouseManagement.Repository\bin\Debug\net6.0\WareHouseManagement.Repository.runtimeconfig.json
+D:\SWD_Suppoter\MAIN_PROJECT\WarehouseManagement\WareHouseManagement.Repository\bin\Debug\net6.0\WareHouseManagement.Repository.dll
+D:\SWD_Suppoter\MAIN_PROJECT\WarehouseManagement\WareHouseManagement.Repository\bin\Debug\net6.0\WareHouseManagement.Repository.pdb
+D:\SWD_Suppoter\MAIN_PROJECT\WarehouseManagement\WareHouseManagement.Repository\obj\Debug\net6.0\WareHouseManagement.Repository.genruntimeconfig.cache
+D:\SWD_Suppoter\MAIN_PROJECT\WarehouseManagement\WareHouseManagement.Repository\obj\Debug\net6.0\ref\WareHouseManagement.Repository.dll
+>>>>>>> 8d0c1d2502c623c8fb77a74b4035519a92683007

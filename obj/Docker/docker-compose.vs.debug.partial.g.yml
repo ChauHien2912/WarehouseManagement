@@ -3,7 +3,11 @@ version: '3.4'
 services:
   warehousemanagement.api:
     image: warehousemanagementapi:dev
+<<<<<<< HEAD
     container_name: "WareHouseManagement.API_1"
+=======
+    container_name: "WareHouseManagement.API"
+>>>>>>> 8d0c1d2502c623c8fb77a74b4035519a92683007
     build:
       args:
         BUILD_CONFIGURATION: Debug
@@ -16,10 +20,17 @@ services:
       - ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=true
       - NUGET_FALLBACK_PACKAGES=/.nuget/fallbackpackages
     volumes:
+<<<<<<< HEAD
       - D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\WareHouseManagement.API:/app
       - D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement:/src
       - C:\Users\admin\vsdbg\vs2017u5:/remote_debugger:rw
       - C:\Users\admin\.nuget\packages\:/.nuget/packages:ro
+=======
+      - D:\SWD_Suppoter\MAIN_PROJECT\WarehouseManagement\WareHouseManagement.API:/app
+      - D:\SWD_Suppoter\MAIN_PROJECT\WarehouseManagement:/src
+      - C:\Users\flami\vsdbg\vs2017u5:/remote_debugger:rw
+      - C:\Users\flami\.nuget\packages\:/.nuget/packages:ro
+>>>>>>> 8d0c1d2502c623c8fb77a74b4035519a92683007
       - C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages:/.nuget/fallbackpackages:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro

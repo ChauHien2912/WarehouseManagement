@@ -2,7 +2,11 @@ version: '3.4'
 
 services:
   warehousemanagement.api:
+<<<<<<< HEAD
     container_name: "WareHouseManagement.API_1"
+=======
+    container_name: "WareHouseManagement.API"
+>>>>>>> 8d0c1d2502c623c8fb77a74b4035519a92683007
     build:
       args:
         BUILD_CONFIGURATION: Release
@@ -10,7 +14,11 @@ services:
         com.microsoft.created-by: "visual-studio"
         com.microsoft.visual-studio.project-name: "WareHouseManagement.API"
     volumes:
+<<<<<<< HEAD
       - C:\Users\admin\vsdbg\vs2017u5:/remote_debugger:rw
+=======
+      - C:\Users\flami\vsdbg\vs2017u5:/remote_debugger:rw
+>>>>>>> 8d0c1d2502c623c8fb77a74b4035519a92683007
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro

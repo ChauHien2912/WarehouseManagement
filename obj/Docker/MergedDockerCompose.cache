@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 name: dockercompose8517456870129686200
 services:
   warehousemanagement.api:
     build:
       context: D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement
+=======
+name: dockercompose10258223339544658543
+services:
+  warehousemanagement.api:
+    build:
+      context: D:\SWD_Suppoter\MAIN_PROJECT\WarehouseManagement
+>>>>>>> 8d0c1d2502c623c8fb77a74b4035519a92683007
       dockerfile: WareHouseManagement.API/Dockerfile
     environment:
       ASPNETCORE_ENVIRONMENT: Development
@@ -19,17 +27,29 @@ services:
         protocol: tcp
     volumes:
       - type: bind
+<<<<<<< HEAD
         source: C:\Users\admin\AppData\Roaming/Microsoft/UserSecrets
+=======
+        source: C:\Users\flami\AppData\Roaming/Microsoft/UserSecrets
+>>>>>>> 8d0c1d2502c623c8fb77a74b4035519a92683007
         target: /root/.microsoft/usersecrets
         read_only: true
         bind:
           create_host_path: true
       - type: bind
+<<<<<<< HEAD
         source: C:\Users\admin\AppData\Roaming/ASP.NET/Https
+=======
+        source: C:\Users\flami\AppData\Roaming/ASP.NET/Https
+>>>>>>> 8d0c1d2502c623c8fb77a74b4035519a92683007
         target: /root/.aspnet/https
         read_only: true
         bind:
           create_host_path: true
 networks:
   default:
+<<<<<<< HEAD
     name: dockercompose8517456870129686200_default
+=======
+    name: dockercompose10258223339544658543_default
+>>>>>>> 8d0c1d2502c623c8fb77a74b4035519a92683007

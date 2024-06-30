@@ -1,8 +1,49 @@
+<<<<<<< HEAD
 name: dockercompose8517456870129686200
 services:
   warehousemanagement.api:
     build:
       context: D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement
+=======
+name: dockercompose10258223339544658543
+services:
+  mssql:
+    container_name: mssql-db
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_DATA_DIR: /var/opt/mssql/data
+      MSSQL_PID: Developer
+      MSSQL_SA_PASSWORD: Admin@123
+      MSSQL_TCP_PORT: "1433"
+    hostname: mssql-db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 1433
+        published: "1455"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: D:\SWD_Suppoter\MAIN_PROJECT\WarehouseManagement\data
+        target: /var/opt/mssql/data
+        bind:
+          create_host_path: true
+      - type: bind
+        source: D:\SWD_Suppoter\MAIN_PROJECT\WarehouseManagement\log
+        target: /var/opt/mssql/log
+        bind:
+          create_host_path: true
+      - type: bind
+        source: D:\SWD_Suppoter\MAIN_PROJECT\WarehouseManagement\secrets
+        target: /var/opt/mssql/secrets
+        bind:
+          create_host_path: true
+  warehousemanagement.api:
+    build:
+      context: D:\SWD_Suppoter\MAIN_PROJECT\WarehouseManagement
+>>>>>>> 8d0c1d2502c623c8fb77a74b4035519a92683007
       dockerfile: WareHouseManagement.API/Dockerfile
       args:
         BUILD_CONFIGURATION: Debug
@@ -10,7 +51,15 @@ services:
         com.microsoft.created-by: visual-studio
         com.microsoft.visual-studio.project-name: WareHouseManagement.API
       target: base
+<<<<<<< HEAD
     container_name: WareHouseManagement.API_1
+=======
+    container_name: WareHouseManagement.API
+    depends_on:
+      mssql:
+        condition: service_started
+        required: true
+>>>>>>> 8d0c1d2502c623c8fb77a74b4035519a92683007
     entrypoint:
       - tail
       - -f
@@ -32,6 +81,13 @@ services:
     ports:
       - mode: ingress
         target: 80
+<<<<<<< HEAD
+=======
+        published: "8001"
+        protocol: tcp
+      - mode: ingress
+        target: 80
+>>>>>>> 8d0c1d2502c623c8fb77a74b4035519a92683007
         protocol: tcp
       - mode: ingress
         target: 443
@@ -39,18 +95,60 @@ services:
     tty: true
     volumes:
       - type: bind
+<<<<<<< HEAD
+=======
+        source: C:\Users\flami\AppData\Roaming/Microsoft/UserSecrets
+        target: /root/.microsoft/usersecrets
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\flami\AppData\Roaming/ASP.NET/Https
+        target: /root/.aspnet/https
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: D:\SWD_Suppoter\MAIN_PROJECT\WarehouseManagement\WareHouseManagement.API
+        target: /app
+        bind:
+          create_host_path: true
+      - type: bind
+        source: D:\SWD_Suppoter\MAIN_PROJECT\WarehouseManagement
+        target: /src
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\flami\vsdbg\vs2017u5
+        target: /remote_debugger
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\flami\.nuget\packages\
+        target: /.nuget/packages
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+>>>>>>> 8d0c1d2502c623c8fb77a74b4035519a92683007
         source: C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages
         target: /.nuget/fallbackpackages
         read_only: true
         bind:
           create_host_path: true
       - type: bind
+<<<<<<< HEAD
         source: C:\Users\admin\.nuget\packages\
         target: /.nuget/packages
+=======
+        source: C:\Users\flami\AppData\Roaming/ASP.NET/Https
+        target: /home/app/.aspnet/https
+>>>>>>> 8d0c1d2502c623c8fb77a74b4035519a92683007
         read_only: true
         bind:
           create_host_path: true
       - type: bind
+<<<<<<< HEAD
         source: C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\HotReload
         target: /HotReloadAgent
         read_only: true
@@ -59,6 +157,10 @@ services:
       - type: bind
         source: C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Sdks\Microsoft.Docker.Sdk\tools\HotReloadProxy\linux-x64\net6.0
         target: /HotReloadProxy
+=======
+        source: C:\Users\flami\AppData\Roaming/Microsoft/UserSecrets
+        target: /home/app/.microsoft/usersecrets
+>>>>>>> 8d0c1d2502c623c8fb77a74b4035519a92683007
         read_only: true
         bind:
           create_host_path: true
@@ -69,6 +171,7 @@ services:
         bind:
           create_host_path: true
       - type: bind
+<<<<<<< HEAD
         source: D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\WareHouseManagement.API
         target: /app
         bind:
@@ -76,10 +179,15 @@ services:
       - type: bind
         source: C:\Users\admin\AppData\Roaming/ASP.NET/Https
         target: /home/app/.aspnet/https
+=======
+        source: C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Sdks\Microsoft.Docker.Sdk\tools\HotReloadProxy\linux-x64\net6.0
+        target: /HotReloadProxy
+>>>>>>> 8d0c1d2502c623c8fb77a74b4035519a92683007
         read_only: true
         bind:
           create_host_path: true
       - type: bind
+<<<<<<< HEAD
         source: C:\Users\admin\AppData\Roaming/Microsoft/UserSecrets
         target: /home/app/.microsoft/usersecrets
         read_only: true
@@ -110,3 +218,13 @@ services:
 networks:
   default:
     name: dockercompose8517456870129686200_default
+=======
+        source: C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\HotReload
+        target: /HotReloadAgent
+        read_only: true
+        bind:
+          create_host_path: true
+networks:
+  default:
+    name: dockercompose10258223339544658543_default
+>>>>>>> 8d0c1d2502c623c8fb77a74b4035519a92683007
