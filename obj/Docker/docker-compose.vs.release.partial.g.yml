@@ -2,11 +2,7 @@ version: '3.4'
 
 services:
   warehousemanagement.api:
-<<<<<<< HEAD
-    container_name: "WareHouseManagement.API_1"
-=======
     container_name: "WareHouseManagement.API"
->>>>>>> 8d0c1d2502c623c8fb77a74b4035519a92683007
     build:
       args:
         BUILD_CONFIGURATION: Release
@@ -14,11 +10,7 @@ services:
         com.microsoft.created-by: "visual-studio"
         com.microsoft.visual-studio.project-name: "WareHouseManagement.API"
     volumes:
-<<<<<<< HEAD
       - C:\Users\admin\vsdbg\vs2017u5:/remote_debugger:rw
-=======
-      - C:\Users\flami\vsdbg\vs2017u5:/remote_debugger:rw
->>>>>>> 8d0c1d2502c623c8fb77a74b4035519a92683007
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
@@ -30,7 +22,7 @@ services:
     entrypoint: tail -f /dev/null
     labels:
       com.microsoft.visualstudio.debuggee.program: "dotnet"
-      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /.nuget/packages --additionalProbingPath /.nuget/fallbackpackages  \"/app/WareHouseManagement.API.dll\""
+      #com.microsoft.visualstudio.debuggee.arguments: " $debuggee_arguments_probing_paths_warehousemanagement.api$ \"/app/WareHouseManagement.API.dll\""
       com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
       com.microsoft.visualstudio.debuggee.killprogram: "/bin/sh -c \"if PID=$$(pidof dotnet); then kill $$PID; fi\""
       com.microsoft.visual-studio.project-name: "WareHouseManagement.API"

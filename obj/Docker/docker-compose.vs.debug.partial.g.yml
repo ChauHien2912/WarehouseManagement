@@ -3,11 +3,7 @@ version: '3.4'
 services:
   warehousemanagement.api:
     image: warehousemanagementapi:dev
-<<<<<<< HEAD
-    container_name: "WareHouseManagement.API_1"
-=======
     container_name: "WareHouseManagement.API"
->>>>>>> 8d0c1d2502c623c8fb77a74b4035519a92683007
     build:
       args:
         BUILD_CONFIGURATION: Debug
@@ -18,20 +14,12 @@ services:
     environment:
       - DOTNET_USE_POLLING_FILE_WATCHER=1
       - ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=true
-      - NUGET_FALLBACK_PACKAGES=/.nuget/fallbackpackages
+      #- NUGET_FALLBACK_PACKAGES=$container_paths_to_fallback_packages_warehousemanagement.api$
     volumes:
-<<<<<<< HEAD
       - D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\WareHouseManagement.API:/app
       - D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement:/src
       - C:\Users\admin\vsdbg\vs2017u5:/remote_debugger:rw
-      - C:\Users\admin\.nuget\packages\:/.nuget/packages:ro
-=======
-      - D:\SWD_Suppoter\MAIN_PROJECT\WarehouseManagement\WareHouseManagement.API:/app
-      - D:\SWD_Suppoter\MAIN_PROJECT\WarehouseManagement:/src
-      - C:\Users\flami\vsdbg\vs2017u5:/remote_debugger:rw
-      - C:\Users\flami\.nuget\packages\:/.nuget/packages:ro
->>>>>>> 8d0c1d2502c623c8fb77a74b4035519a92683007
-      - C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages:/.nuget/fallbackpackages:ro
+#$nuget_volume_mapping_warehousemanagement.api$
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
@@ -43,7 +31,7 @@ services:
     entrypoint: tail -f /dev/null
     labels:
       com.microsoft.visualstudio.debuggee.program: "dotnet"
-      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /.nuget/packages --additionalProbingPath /.nuget/fallbackpackages  \"/app/bin/Debug/net6.0/WareHouseManagement.API.dll\""
+      #com.microsoft.visualstudio.debuggee.arguments: " $debuggee_arguments_probing_paths_warehousemanagement.api$ \"/app/bin/Debug/net6.0/WareHouseManagement.API.dll\""
       com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
       com.microsoft.visualstudio.debuggee.killprogram: "/bin/sh -c \"if PID=$$(pidof dotnet); then kill $$PID; fi\""
     tty: true
