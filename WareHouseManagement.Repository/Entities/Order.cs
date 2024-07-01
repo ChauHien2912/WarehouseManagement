@@ -18,6 +18,7 @@ namespace WareHouseManagement.Repository.Entities
         public Guid? WarehouseId { get; set; }
         public DateTime? DeliveryDate { get; set; }
         public string? Img { get; set; }
+        public string? Address { get; set; }
 
         public virtual Warehouse? Warehouse { get; set; }
         public virtual ICollection<BatchOrder> BatchOrders { get; set; }

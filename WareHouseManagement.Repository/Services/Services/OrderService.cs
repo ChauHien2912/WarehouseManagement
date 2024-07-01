@@ -63,7 +63,9 @@ namespace WareHouseManagement.Repository.Services.Services
                                 Price = worksheet.Cells[row, 3].GetValue<decimal>(),
                                 DeliveryDate = worksheet.Cells[row, 4].GetValue<DateTime>(),
                                 Img = worksheet.Cells[row, 5].GetValue<string>(),
+                                Address = worksheet.Cells[row, 6].GetValue<string>(),
                                 WarehouseId = request.WarehouseId
+                                
                             };
                             orders.Add(order);
                         }

@@ -1,6 +1,38 @@
-<<<<<<< HEAD
 name: dockercompose8517456870129686200
 services:
+  mssql:
+    container_name: mssql-db
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_DATA_DIR: /var/opt/mssql/data
+      MSSQL_PID: Developer
+      MSSQL_SA_PASSWORD: Admin@123
+      MSSQL_TCP_PORT: "1433"
+    hostname: mssql-db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 1433
+        published: "1455"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\data
+        target: /var/opt/mssql/data
+        bind:
+          create_host_path: true
+      - type: bind
+        source: D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\log
+        target: /var/opt/mssql/log
+        bind:
+          create_host_path: true
+      - type: bind
+        source: D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\secrets
+        target: /var/opt/mssql/secrets
+        bind:
+          create_host_path: true
   warehousemanagement.api:
     build:
       context: D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement
@@ -12,6 +44,10 @@ services:
         com.microsoft.visual-studio.project-name: WareHouseManagement.API
       target: base
     container_name: WareHouseManagement.API
+    depends_on:
+      mssql:
+        condition: service_started
+        required: true
     entrypoint:
       - tail
       - -f
@@ -28,72 +64,19 @@ services:
       com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof dotnet); then kill $$PID; fi"
       com.microsoft.visualstudio.debuggee.program: dotnet
       com.microsoft.visualstudio.debuggee.workingdirectory: /app
-=======
-name: dockercompose10258223339544658543
-services:
-  mssql:
-    container_name: mssql-db
-    environment:
-      ACCEPT_EULA: "Y"
-      MSSQL_DATA_DIR: /var/opt/mssql/data
-      MSSQL_PID: Developer
-      MSSQL_SA_PASSWORD: Admin@123
-      MSSQL_TCP_PORT: "1433"
-    hostname: mssql-db
-    image: mcr.microsoft.com/mssql/server:2022-latest
->>>>>>> 8d0c1d2502c623c8fb77a74b4035519a92683007
     networks:
       default: null
     ports:
       - mode: ingress
-<<<<<<< HEAD
-=======
-        target: 1433
-        published: "1455"
+        target: 80
         protocol: tcp
-    volumes:
-      - type: bind
-        source: D:\SWD_Suppoter\MAIN_PROJECT\WarehouseManagement\data
-        target: /var/opt/mssql/data
-        bind:
-          create_host_path: true
-      - type: bind
-        source: D:\SWD_Suppoter\MAIN_PROJECT\WarehouseManagement\log
-        target: /var/opt/mssql/log
-        bind:
-          create_host_path: true
-      - type: bind
-        source: D:\SWD_Suppoter\MAIN_PROJECT\WarehouseManagement\secrets
-        target: /var/opt/mssql/secrets
-        bind:
-          create_host_path: true
-  warehousemanagement.api:
-    build:
-      context: D:\SWD_Suppoter\MAIN_PROJECT\WarehouseManagement
-      dockerfile: WareHouseManagement.API/Dockerfile
-    depends_on:
-      mssql:
-        condition: service_started
-        required: true
-    environment:
-      ASPNETCORE_ENVIRONMENT: Development
-      ASPNETCORE_URLS: https://+:443;http://+:80
-    image: warehousemanagementapi
-    networks:
-      default: null
-    ports:
       - mode: ingress
         target: 80
         published: "8001"
         protocol: tcp
       - mode: ingress
->>>>>>> 8d0c1d2502c623c8fb77a74b4035519a92683007
-        target: 80
-        protocol: tcp
-      - mode: ingress
         target: 443
         protocol: tcp
-<<<<<<< HEAD
     tty: true
     volumes:
       - type: bind
@@ -156,30 +139,15 @@ services:
           create_host_path: true
       - type: bind
         source: C:\Users\admin\AppData\Roaming/Microsoft/UserSecrets
-=======
-    volumes:
-      - type: bind
-        source: C:\Users\flami\AppData\Roaming/Microsoft/UserSecrets
->>>>>>> 8d0c1d2502c623c8fb77a74b4035519a92683007
         target: /root/.microsoft/usersecrets
         read_only: true
         bind:
           create_host_path: true
       - type: bind
-<<<<<<< HEAD
         source: D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement
         target: /src
-=======
-        source: C:\Users\flami\AppData\Roaming/ASP.NET/Https
-        target: /root/.aspnet/https
-        read_only: true
->>>>>>> 8d0c1d2502c623c8fb77a74b4035519a92683007
         bind:
           create_host_path: true
 networks:
   default:
-<<<<<<< HEAD
     name: dockercompose8517456870129686200_default
-=======
-    name: dockercompose10258223339544658543_default
->>>>>>> 8d0c1d2502c623c8fb77a74b4035519a92683007

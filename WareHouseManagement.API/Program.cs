@@ -22,13 +22,13 @@ builder.Services.AddDIRepositories();
 builder.Services.AddDIAccessor();
 // Auto Mapping
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
-
-// Add services to the container.
+//Setting Cors for all source
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: CorsConstant.PolicyName,
-        policy => { policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod(); });
+        policy => { policy.WithOrigins("*").AllowAnyHeader().AllowAnyMethod(); });
 });
+
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

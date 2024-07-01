@@ -32,7 +32,7 @@ namespace WareHouseManagement.Repository.Entities
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=172.28.160.1,1455;User ID=sa;Password=Admin@123;Database=OrderManagement;Trusted_Connection=False;TrustServerCertificate=True;");
+                optionsBuilder.UseSqlServer("Server=LAPTOP-Q339A538\\SQLEXPRESS;User ID=sa;Password=123456;Database=OrderManagement;Trusted_Connection=False;TrustServerCertificate=True;");
             }
         }
 
@@ -145,6 +145,8 @@ namespace WareHouseManagement.Repository.Entities
                 entity.Property(e => e.Id)
                     .ValueGeneratedNever()
                     .HasColumnName("id");
+
+                entity.Property(e => e.Address).HasMaxLength(255);
 
                 entity.Property(e => e.DeliveryDate)
                     .HasColumnType("date")
