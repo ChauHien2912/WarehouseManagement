@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using WareHouseManagement.Repository.Dtos.Request.Account;
 using WareHouseManagement.Repository.Dtos.Response.Account;
 using WareHouseManagement.Repository.Dtos.Response.User;
-using WareHouseManagement.Repository.Entities;
+using WareHouseManagement.Repository.Models;
 using WareHouseManagement.Repository.Enum;
 using WareHouseManagement.Repository.Repository;
 using WareHouseManagement.Repository.Services.IServices;
@@ -123,7 +123,7 @@ namespace WareHouseManagement.Repository.Services.Services
                 warehouse.AccountId = account.Id;
                 warehouse.Id = Guid.NewGuid();
                 warehouse.Location = createAccountRequest.Location;
-                warehouse.Name = createAccountRequest.FullName;
+                warehouse.FullName = createAccountRequest.FullName;
                 warehouse.Phone = createAccountRequest.Phone;
                 await _uof.GetRepository<Warehouse>().InsertAsync(warehouse);
             }

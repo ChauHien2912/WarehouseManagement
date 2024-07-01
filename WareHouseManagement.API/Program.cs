@@ -7,7 +7,7 @@ using WareHouseManagement.API.Configuration;
 using WareHouseManagement.Repository.Helper;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using BirthdayParty.WebApi.Constants;
-using WareHouseManagement.Repository.Entities;
+using WareHouseManagement.Repository.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using WareHouseManagement.Repository.Dtos.Request.WareHouse;
 using WareHouseManagement.Repository.Dtos.Response.Shipper;
 using WareHouseManagement.Repository.Dtos.Response.WareHouse;
-using WareHouseManagement.Repository.Entities;
+using WareHouseManagement.Repository.Models;
 
 //using WareHouseManagement.Repository.Models;
 using WareHouseManagement.Repository.Repository;

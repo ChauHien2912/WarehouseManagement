@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WareHouseManagement.Repository.Dtos.Request.User;
 using WareHouseManagement.Repository.Dtos.Response.User;
-using WareHouseManagement.Repository.Entities;
+using WareHouseManagement.Repository.Models;
 using WareHouseManagement.Repository.Repository;
 using WareHouseManagement.Repository.Specifications;
 

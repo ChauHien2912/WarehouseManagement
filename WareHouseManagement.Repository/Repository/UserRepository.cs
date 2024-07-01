@@ -5,7 +5,7 @@ using System.Linq;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
-using WareHouseManagement.Repository.Entities;
+using WareHouseManagement.Repository.Models;
 
 //using WareHouseManagement.Repository.Models;
 

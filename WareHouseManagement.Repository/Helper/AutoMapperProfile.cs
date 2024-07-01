@@ -15,7 +15,7 @@ using WareHouseManagement.Repository.Dtos.Response.Role;
 using WareHouseManagement.Repository.Dtos.Response.Shipper;
 using WareHouseManagement.Repository.Dtos.Response.User;
 using WareHouseManagement.Repository.Dtos.Response.WareHouse;
-using WareHouseManagement.Repository.Entities;
+using WareHouseManagement.Repository.Models;
 //using WareHouseManagement.Repository.Models;
 
 

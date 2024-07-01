@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using WareHouseManagement.Repository.Dtos.Request.Order;
 using WareHouseManagement.Repository.Dtos.Response.Order;
 using WareHouseManagement.Repository.Enum;
-using WareHouseManagement.Repository.Entities;
+using WareHouseManagement.Repository.Models;
 using WareHouseManagement.Repository.Repository;
 using WareHouseManagement.Repository.Services.IServices;
 using WareHouseManagement.Repository.Specifications;
