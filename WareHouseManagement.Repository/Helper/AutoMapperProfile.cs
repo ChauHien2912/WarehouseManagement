@@ -15,7 +15,7 @@ using WareHouseManagement.Repository.Dtos.Response.Role;
 using WareHouseManagement.Repository.Dtos.Response.Shipper;
 using WareHouseManagement.Repository.Dtos.Response.User;
 using WareHouseManagement.Repository.Dtos.Response.WareHouse;
-using WareHouseManagement.Repository.Models;
+using WareHouseManagement.Repository.Entities;
 //using WareHouseManagement.Repository.Models;
 
 
@@ -57,7 +57,7 @@ namespace WareHouseManagement.Repository.Helper
 
             //// Shipper
             CreateMap<GetShipperResponse, Shipper>().ReverseMap();
-
+            CreateMap<Shipper, GetShipperResponse>().ReverseMap();
 
             //Warehouse 
             CreateMap<GetWarehouseResponse, Warehouse>().ReverseMap();

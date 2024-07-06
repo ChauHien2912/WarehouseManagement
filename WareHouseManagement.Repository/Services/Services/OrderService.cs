@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using WareHouseManagement.Repository.Dtos.Request.Order;
 using WareHouseManagement.Repository.Dtos.Response.Order;
 using WareHouseManagement.Repository.Enum;
-using WareHouseManagement.Repository.Models;
+using WareHouseManagement.Repository.Entities;
 using WareHouseManagement.Repository.Repository;
 using WareHouseManagement.Repository.Services.IServices;
 using WareHouseManagement.Repository.Specifications;
@@ -140,7 +140,8 @@ namespace WareHouseManagement.Repository.Services.Services
         predicate: p => p.Batch.ShipperId == shipperid,
         page: page,
         size: size,
-        include: i => i.Include(bo => bo.Order).Include(bo => bo.Batch)
+        include: i => i.Include(bo => bo.Order).Include(bo => bo.Batch),
+        orderBy: o => o.OrderBy(o => o.Order.OrderDate)
     );
 
             // Map the results to GetOrderResponse
@@ -160,7 +161,7 @@ namespace WareHouseManagement.Repository.Services.Services
         {
             var orders = await _uow.GetRepository<BatchOrder>().GetPagingListAsync(predicate: p => p.Batch.BatchMode == BatchMode.DELIVERING,
                                 include: i => i.Include(q => q.Order).Include(m => m.Batch),
-                                orderBy: i => i.OrderByDescending(i => i.Order.DeliveryDate)
+                                orderBy: i => i.OrderBy(i => i.Order.DeliveryDate)
                                 );
             var orderResponses = new Paginate<GetOrderResponse>()
             {
@@ -178,7 +179,7 @@ namespace WareHouseManagement.Repository.Services.Services
         {
             var orders = await _uow.GetRepository<BatchOrder>().GetPagingListAsync(predicate: p => p.Batch.BatchMode == BatchMode.FAIL,
                                 include: i => i.Include(q => q.Order).Include(m => m.Batch),
-                                orderBy: i => i.OrderByDescending(i => i.Order.DeliveryDate)
+                                orderBy: i => i.OrderBy(i => i.Order.DeliveryDate)
                                 );
             var orderResponses = new Paginate<GetOrderResponse>()
             {
@@ -195,7 +196,7 @@ namespace WareHouseManagement.Repository.Services.Services
         {
             var orders = await _uow.GetRepository<BatchOrder>().GetPagingListAsync(predicate: p => p.Batch.BatchMode == BatchMode.IMPORTED,
                                 include: i => i.Include(q => q.Order).Include(m => m.Batch),
-                                orderBy: i => i.OrderByDescending(i => i.Order.DeliveryDate)
+                                orderBy: i => i.OrderBy(i => i.Order.DeliveryDate)
                                 );
             var orderResponses = new Paginate<GetOrderResponse>()
             {
@@ -227,7 +228,7 @@ namespace WareHouseManagement.Repository.Services.Services
         {
             var orders = await _uow.GetRepository<BatchOrder>().GetPagingListAsync(predicate: p => p.Batch.BatchMode == BatchMode.SUCCESS,
                                 include: i => i.Include(q => q.Order).Include(m => m.Batch),
-                                orderBy: i => i.OrderByDescending(i => i.Order.DeliveryDate)
+                                orderBy: i => i.OrderBy(i => i.Order.DeliveryDate)
                                 );
             var orderResponses = new Paginate<GetOrderResponse>()
             {
@@ -244,7 +245,7 @@ namespace WareHouseManagement.Repository.Services.Services
         {
             var orders = await _uow.GetRepository<BatchOrder>().GetPagingListAsync(predicate: p => p.Batch.BatchMode == BatchMode.TRUCKIN,
                                 include: i => i.Include(q => q.Order).Include(m => m.Batch),
-                                orderBy: i => i.OrderByDescending(i => i.Order.DeliveryDate)
+                                orderBy: i => i.OrderBy(i => i.Order.DeliveryDate)
                                 );
             var orderResponses = new Paginate<GetOrderResponse>()
             {
@@ -261,7 +262,7 @@ namespace WareHouseManagement.Repository.Services.Services
         {
             var orders = await _uow.GetRepository<BatchOrder>().GetPagingListAsync(predicate: p => p.Batch.BatchMode == BatchMode.TRUCKOUT,
                                 include: i => i.Include(q => q.Order).Include(m => m.Batch),
-                                orderBy: i => i.OrderByDescending(i => i.Order.DeliveryDate)
+                                orderBy: i => i.OrderBy(i => i.Order.DeliveryDate)
                                 );
             var orderResponses = new Paginate<GetOrderResponse>()
             {
@@ -285,35 +286,42 @@ namespace WareHouseManagement.Repository.Services.Services
             }
 
             // Lấy danh sách batch có BatchMode là "truckin" trong kho
-            List<Batch> batches = (List<Batch>)await _uow.GetRepository<Batch>().GetListAsync(predicate: b => b.WarehouseId == warehouseid && b.BatchMode == "truckin");
+            List<Batch> batches = (List<Batch>)await _uow.GetRepository<Batch>().GetListAsync(predicate: b => b.WarehouseId == warehouseid && b.BatchMode == "truckin",
+                                    include: i => i.Include(bo => bo.BatchOrders).ThenInclude(bos => bos.Order));
 
-            // Đếm số lượng batch đã cập nhật
             int updatedBatchCount = 0;
-
-            // Phân chia đều các batch cho các shipper
             int shipperIndex = 0;
             foreach (var batch in batches)
             {
-                batch.BatchMode = BatchMode.IMPORTED; // Cập nhật trạng thái của batch
-                batch.ShipperId = shipperList[shipperIndex].Id; // Gán batch cho shipper
+                batch.BatchMode = BatchMode.IMPORTED;
+                batch.ShipperId = shipperList[shipperIndex].Id;
                 batch.DateModifiedBatchMode = DateTime.Now;
-                shipperIndex = (shipperIndex + 1) % shipperList.Count; // Di chuyển đến shipper tiếp theo
+                shipperIndex = (shipperIndex + 1) % shipperList.Count;
+
+                // Update each order's ImportedDate
+                foreach (var batchOrder in batch.BatchOrders)
+                {
+                    batchOrder.Order.ImportedDate = DateTime.Now;
+                    
+                    _uow.GetRepository<Order>().UpdateAsync(batchOrder.Order);
+                }
+
                 _uow.GetRepository<Batch>().UpdateAsync(batch);
-                updatedBatchCount++; // Tăng biến đếm
+                updatedBatchCount++;
             }
 
-            // Lưu các thay đổi vào cơ sở dữ liệu
             await _uow.CommitAsync();
 
-            return updatedBatchCount; // Trả về số lượng batch đã cập nhật
+            return updatedBatchCount;
         }
+
+
+
 
         public async Task<bool> UpdateBatchModeByShipper(UpdateBactchModeRequest request)
         {
 
-            var batchorder = await _uow.GetRepository<BatchOrder>().SingleOrDefaultAsync(
-                        predicate: p => p.Id == request.BatchOrderId
-                        );
+            var batchorder = await _uow.GetRepository<BatchOrder>().SingleOrDefaultAsync(predicate: p => p.Id == request.BatchOrderId);
             var batch = await _uow.GetRepository<Batch>().SingleOrDefaultAsync(
                         predicate: p => p.Id == batchorder.BatchId
                         );
@@ -346,7 +354,7 @@ namespace WareHouseManagement.Repository.Services.Services
 
             return isUpdated;
         }
+
+
     }
-
-
 }

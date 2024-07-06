@@ -78,3 +78,10 @@ D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\WareHouseM
 D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\WareHouseManagement.API\obj\Debug\net6.0\WareHouseManagement.API.pdb
 D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\WareHouseManagement.API\obj\Debug\net6.0\WareHouseManagement.API.genruntimeconfig.cache
 D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\WareHouseManagement.API\obj\Debug\net6.0\ref\WareHouseManagement.API.dll
+D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\WareHouseManagement.API\bin\Debug\net6.0\ClosedXML.dll
+D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\WareHouseManagement.API\bin\Debug\net6.0\DocumentFormat.OpenXml.dll
+D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\WareHouseManagement.API\bin\Debug\net6.0\ExcelNumberFormat.dll
+D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\WareHouseManagement.API\bin\Debug\net6.0\Irony.dll
+D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\WareHouseManagement.API\bin\Debug\net6.0\SixLabors.Fonts.dll
+D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\WareHouseManagement.API\bin\Debug\net6.0\System.IO.Packaging.dll
+D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\WareHouseManagement.API\bin\Debug\net6.0\XLParser.dll

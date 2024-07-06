@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using WareHouseManagement.Repository.Dtos.Request.Account;
 using WareHouseManagement.Repository.Dtos.Response.Account;
 using WareHouseManagement.Repository.Dtos.Response.User;
-using WareHouseManagement.Repository.Models;
+using WareHouseManagement.Repository.Entities;
 using WareHouseManagement.Repository.Enum;
 using WareHouseManagement.Repository.Repository;
 using WareHouseManagement.Repository.Services.IServices;
