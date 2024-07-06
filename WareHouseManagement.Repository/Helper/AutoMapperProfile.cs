@@ -49,11 +49,13 @@ namespace WareHouseManagement.Repository.Helper
             CreateMap<CreateAccountRequest, CreateAccountResponse>().ReverseMap();
 
 
+
+
             //// Authen
 
             CreateMap<ShipperLoginResponse, Shipper>().ReverseMap();
             CreateMap<WarehouseLoginResponse, Warehouse>().ReverseMap();
-
+            CreateMap<AdminLoginResponse, Admin>().ReverseMap();
 
             //// Shipper
             CreateMap<GetShipperResponse, Shipper>().ReverseMap();
@@ -63,7 +65,7 @@ namespace WareHouseManagement.Repository.Helper
             CreateMap<GetWarehouseResponse, Warehouse>().ReverseMap();
             CreateMap<Warehouse, UpdateWarehouseRequest>().ReverseMap();
             CreateMap<CreateWarehouseResponse, Warehouse>().ReverseMap();
-
+            CreateMap<Warehouse, GetWarehouseResponse>().ReverseMap();
 
 
             //Order
@@ -77,9 +79,13 @@ namespace WareHouseManagement.Repository.Helper
             .ForMember(dest => dest.WarehouseId, opt => opt.MapFrom(src => src.Order.WarehouseId))
             .ForMember(dest => dest.DeliveryDate, opt => opt.MapFrom(src => src.Order.DeliveryDate))
             .ForMember(dest => dest.Img, opt => opt.MapFrom(src => src.Order.Img))
+            .ForMember(dest => dest.Img, opt => opt.MapFrom(src => src.Order.Img))
             .ForMember(dest => dest.BatchMode, opt => opt.MapFrom(src => src.Batch.BatchMode))
             .ForMember(dest => dest.ShipperId, opt => opt.MapFrom(src => src.Batch.ShipperId))
             .ForMember(dest => dest.BatchId, opt => opt.MapFrom(src => src.BatchId));
+
+
+
         }
     }
 }

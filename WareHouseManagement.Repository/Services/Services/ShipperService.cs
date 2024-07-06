@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WareHouseManagement.Repository.Dtos.Request.NewFolder;
 using WareHouseManagement.Repository.Dtos.Request.Shippper;
+using WareHouseManagement.Repository.Dtos.Response.Order;
 using WareHouseManagement.Repository.Dtos.Response.Shipper;
 using WareHouseManagement.Repository.Entities;
 
@@ -51,6 +53,24 @@ namespace WareHouseManagement.Repository.Services.Services
             return isDeleted;
 
 
+        }
+
+        public async Task<IPaginate<GetOrderResponse>> GetOrderOfShipperByImported(Guid id, string Batchmode,  int page, int size)
+        {
+            var orders = await _uof.GetRepository<BatchOrder>().GetPagingListAsync(predicate: p => p.Batch.ShipperId == id
+                        && p.Batch.BatchMode == Batchmode,
+                        include: i => i.Include(d => d.Order),
+                        orderBy: o => o.OrderBy(m => m.Order.ImportedDate)
+                        );
+            var orderResponses = new Paginate<GetOrderResponse>()
+            {
+                Page = orders.Page,
+                Size = orders.Size,
+                Total = orders.Total,
+                TotalPages = orders.TotalPages,
+                Items = _mapper.Map<IList<GetOrderResponse>>(orders.Items),
+            };
+            return orderResponses;
         }
 
         public async Task<GetShipperResponse> GetShipperById(Guid id)

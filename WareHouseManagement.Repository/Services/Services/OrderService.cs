@@ -209,6 +209,24 @@ namespace WareHouseManagement.Repository.Services.Services
             return orderResponses;
         }
 
+        public async Task<IPaginate<GetOrderResponse>> GetOrderOfWarehouseByBatchMode(Guid warehouseid, string BatchMode, int page, int size)
+        {
+            var orders = await _uow.GetRepository<BatchOrder>().GetPagingListAsync(predicate: p => p.Batch.WarehouseId == warehouseid 
+                        && p.Batch.BatchMode == BatchMode, 
+                        include: i => i.Include(d => d.Order),
+                        orderBy: o => o.OrderBy(m => m.Order.ImportedDate)
+                        );
+            var orderResponses = new Paginate<GetOrderResponse>()
+            {
+                Page = orders.Page,
+                Size = orders.Size,
+                Total = orders.Total,
+                TotalPages = orders.TotalPages,
+                Items = _mapper.Map<IList<GetOrderResponse>>(orders.Items),
+            };
+            return orderResponses;
+        }
+
         public async Task<IPaginate<GetOrderResponse>> GetOrders(int page, int size)
         {
             var orders = await _uow.GetRepository<Order>().GetPagingListAsync(page: page, size: size);

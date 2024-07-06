@@ -71,7 +71,7 @@ namespace WareHouseManagement.Repository.Services.Services
             Warehouse warehouse = await _uof.GetRepository<Warehouse>().SingleOrDefaultAsync(predicate: x => x.AccountId == account.Id);
             Shipper shipper = await _uof.GetRepository<Shipper>().SingleOrDefaultAsync(predicate: x => x.AccountId == account.Id);
             Admin admin = await _uof.GetRepository<Admin>().SingleOrDefaultAsync(predicate: x => x.AccountId == account.Id);
-            if (warehouse == null && shipper == null)
+            if (warehouse == null && shipper == null && admin == null)
             {
                 throw new Exception("Không tìm thấy tài khoản");
             }

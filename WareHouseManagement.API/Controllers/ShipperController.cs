@@ -92,5 +92,24 @@ namespace WareHouseManagement.API.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> GetOrderOfShipperByBatchMode([FromRoute] Guid id, [FromQuery]string batchmode, [FromQuery]int page = 1, [FromQuery]int size = 10)
+        {
+            try
+            {
+                var result = await _shipperservice.GetOrderOfShipperByImported(id, batchmode, page, size);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }

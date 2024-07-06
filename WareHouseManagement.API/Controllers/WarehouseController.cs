@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using DocumentFormat.OpenXml.Office2016.Excel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WareHouseManagement.API.Constant;
+using WareHouseManagement.Repository.Dtos.Request.NewFolder;
 using WareHouseManagement.Repository.Dtos.Request.WareHouse;
 using WareHouseManagement.Repository.Services.IServices;
 
@@ -95,11 +97,11 @@ namespace WareHouseManagement.API.Controllers
         }
         [HttpGet]
         [Route("{id:Guid}")]
-        public async Task<IActionResult> GetRevenueSuccessByWarehouseId([FromRoute] Guid id, [FromQuery] int day, [FromQuery] int month, [FromQuery] int year)
+        public async Task<IActionResult> GetRevenueSuccessByWarehouseId([FromRoute] Guid id, [FromQuery] DateRequest request)
         {
             try
             {
-                var result = await _warehouseService.GetRevenueBySuccess(id,day, month, year);
+                var result = await _warehouseService.GetRevenueBySuccess(id,request);
                 if (result == null)
                 {
                     return NotFound();
@@ -113,11 +115,11 @@ namespace WareHouseManagement.API.Controllers
         }
         [HttpGet]
         [Route("{id:Guid}")]
-        public async Task<IActionResult> GetRevenueImportedByWarehouseId([FromRoute] Guid id, [FromQuery]int day ,[FromQuery] int month, [FromQuery] int year)
+        public async Task<IActionResult> GetRevenueImportedByWarehouseId([FromRoute] Guid id, [FromQuery]DateRequest request)
         {
             try
             {
-                var result = await _warehouseService.GetRevenueByImprorted(id,day, month, year);
+                var result = await _warehouseService.GetRevenueByImprorted(id,request);
                 if (result == null)
                 {
                     return NotFound();
@@ -227,11 +229,11 @@ namespace WareHouseManagement.API.Controllers
 
         [HttpGet]
         [Route("{id:Guid}")]
-        public async Task<IActionResult> GetCountImportedInDate([FromRoute] Guid id, [FromQuery] int day, [FromQuery] int month, [FromQuery] int year)
+        public async Task<IActionResult> GetCountImportedInDate([FromRoute] Guid id, [FromQuery] DateRequest request)
         {
             try
             {
-                var result = await _warehouseService.GetOrderImportedInDate(id, day, month, year);
+                var result = await _warehouseService.GetOrderImportedInDate(id, request);
                 if (result == null)
                 {
                     return NotFound();
@@ -246,11 +248,11 @@ namespace WareHouseManagement.API.Controllers
 
         [HttpGet]
         [Route("{id:Guid}")]
-        public async Task<IActionResult> GetCountExportedInDate([FromRoute] Guid id, [FromQuery] int day, [FromQuery] int month, [FromQuery] int year)
+        public async Task<IActionResult> GetCountExportedInDate([FromRoute] Guid id, [FromQuery]DateRequest request)
         {
             try
             {
-                var result = await _warehouseService.GetOrderExportedInDate(id, day, month, year);
+                var result = await _warehouseService.GetOrderExportedInDate(id, request);
                 if (result == null)
                 {
                     return NotFound();

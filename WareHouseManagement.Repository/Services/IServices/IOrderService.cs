@@ -29,8 +29,9 @@ namespace WareHouseManagement.Repository.Services.IServices
         Task<IPaginate<GetOrderResponse>> GetOrderDeliveing(int page, int size);
         Task<IPaginate<GetOrderResponse>> GetOrderSuccess(int page, int size);
         Task<IPaginate<GetOrderResponse>> GetOrderFail(int page, int size);
-
         Task<IPaginate<GetOrderResponse>> GetOrderTruckIn(int page, int size);
+
+        Task<IPaginate<GetOrderResponse>> GetOrderOfWarehouseByBatchMode(Guid warehouseid, string BatchMode, int page, int size);
 
     }
 }

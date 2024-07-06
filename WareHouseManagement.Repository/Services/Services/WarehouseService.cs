@@ -18,6 +18,7 @@ using WareHouseManagement.Repository.Repository;
 using WareHouseManagement.Repository.Services.IServices;
 using WareHouseManagement.Repository.Specifications;
 using ClosedXML.Excel;
+using WareHouseManagement.Repository.Dtos.Request.NewFolder;
 
 namespace WareHouseManagement.Repository.Services.Services
 {
@@ -128,7 +129,7 @@ namespace WareHouseManagement.Repository.Services.Services
             }
         }
 
-        public async Task<int> GetOrderExportedInDate(Guid id, int day, int month, int year)
+        public async Task<int> GetOrderExportedInDate(Guid id, DateRequest? daterequest)
         {
             var warehouse = await _uof.GetRepository<Warehouse>().SingleOrDefaultAsync(predicate: p => p.Id == id);
             if (warehouse == null)
@@ -136,11 +137,25 @@ namespace WareHouseManagement.Repository.Services.Services
                 throw new Exception("Not Found Warehouse");
             }
 
+            DateTime startDate, endDate;
+            if (daterequest == null)
+            {
+                // If daterequest is null, get the orders from the last 3 months
+                endDate = DateTime.Now;
+                startDate = endDate.AddMonths(-3);
+            }
+            else
+            {
+                // If daterequest is provided, use the specific day provided
+                startDate = new DateTime((int)daterequest.Year, (int)daterequest.Month, (int)daterequest.Day);
+                endDate = startDate;
+            }
+
             var orders = await _uof.GetRepository<BatchOrder>().GetListAsync(
                 predicate: p => p.Batch.BatchMode == BatchMode.TRUCKOUT
                                 && p.Batch.WarehouseId == id
-                                && p.Order.ExportedDate.Value.Month == month
-                                && p.Order.ExportedDate.Value.Year == year && p.Order.ExportedDate.Value.Day == day,
+                                && p.Order.ExportedDate >= startDate
+                                && p.Order.ExportedDate <= endDate,
                 include: i => i.Include(q => q.Order).Include(m => m.Batch),
                 orderBy: i => i.OrderBy(i => i.Order.ExportedDate)
             );
@@ -170,7 +185,7 @@ namespace WareHouseManagement.Repository.Services.Services
             return orderResponses;
         }
 
-        public async Task<int> GetOrderImportedInDate(Guid id, int day, int month, int year)
+        public async Task<int> GetOrderImportedInDate(Guid id, DateRequest daterequest)
         {
             var warehouse = await _uof.GetRepository<Warehouse>().SingleOrDefaultAsync(predicate: p => p.Id == id);
             if (warehouse == null)
@@ -178,11 +193,25 @@ namespace WareHouseManagement.Repository.Services.Services
                 throw new Exception("Not Found Warehouse");
             }
 
+            DateTime startDate, endDate;
+            if (daterequest == null)
+            {
+                // If daterequest is null, get the orders from the last 3 months
+                endDate = DateTime.Now;
+                startDate = endDate.AddMonths(-3);
+            }
+            else
+            {
+                // If daterequest is provided, use the specific day provided
+                startDate = new DateTime((int)daterequest.Year, (int)daterequest.Month, (int)daterequest.Day);
+                endDate = startDate;
+            }
+
             var orders = await _uof.GetRepository<BatchOrder>().GetListAsync(
                 predicate: p => p.Batch.BatchMode == BatchMode.IMPORTED
                                 && p.Batch.WarehouseId == id
-                                && p.Order.ExportedDate.Value.Month == month
-                                && p.Order.ExportedDate.Value.Year == year && p.Order.ExportedDate.Value.Day == day,
+                                && p.Order.ExportedDate >= startDate
+                                && p.Order.ExportedDate <= endDate,
                 include: i => i.Include(q => q.Order).Include(m => m.Batch),
                 orderBy: i => i.OrderBy(i => i.Order.ExportedDate)
             );
@@ -261,30 +290,44 @@ namespace WareHouseManagement.Repository.Services.Services
             return (decimal)successOrdersCount / totalOrders;
         }
 
-        public async Task<decimal> GetRevenueByImprorted(Guid warehouseid, int day, int month, int year)
+        public async Task<decimal> GetRevenueByImprorted(Guid warehouseid, DateRequest? daterequest)
         {
             var warehouse = await _uof.GetRepository<Warehouse>().SingleOrDefaultAsync(predicate: p => p.Id == warehouseid);
             if (warehouse == null)
             {
                 throw new Exception("Not Found Warehouse");
+            }
+
+            DateTime startDate, endDate;
+            if (daterequest == null)
+            {
+                // If daterequest is null, get the orders from the last 3 months
+                endDate = DateTime.Now;
+                startDate = endDate.AddMonths(-3);
+            }
+            else
+            {
+                // If daterequest is provided, use the specific day provided
+                startDate = new DateTime((int)daterequest.Year, (int)daterequest.Month, (int)daterequest.Day);
+                endDate = startDate;
             }
 
             var orders = await _uof.GetRepository<BatchOrder>().GetListAsync(
                 predicate: p => p.Batch.BatchMode == BatchMode.IMPORTED
                                 && p.Batch.WarehouseId == warehouseid
-                                && p.Order.DeliveryDate.Value.Month == month
-                                && p.Order.DeliveryDate.Value.Year == year && p.Order.DeliveryDate.Value.Day == day,
+                                && p.Order.ImportedDate >= startDate
+                                && p.Order.ImportedDate <= endDate,
                 include: i => i.Include(q => q.Order).Include(m => m.Batch),
                 orderBy: i => i.OrderBy(i => i.Order.DeliveryDate)
             );
 
             // Calculate the total price directly from the orders
-            decimal totalPrice = (decimal)orders.Sum(order => order.Order.Price);
+            decimal totalPrice = orders.Sum(order => order.Order.Price.HasValue ? order.Order.Price.Value : 0);
 
             return totalPrice;
         }
 
-        public async Task<decimal> GetRevenueBySuccess(Guid warehouseid,int day, int month, int year)
+        public async Task<decimal> GetRevenueBySuccess(Guid warehouseid, DateRequest? daterequest)
         {
             var warehouse = await _uof.GetRepository<Warehouse>().SingleOrDefaultAsync(predicate: p => p.Id == warehouseid);
             if (warehouse == null)
@@ -292,17 +335,31 @@ namespace WareHouseManagement.Repository.Services.Services
                 throw new Exception("Not Found Warehouse");
             }
 
+            DateTime startDate, endDate;
+            if (daterequest == null)
+            {
+                // If daterequest is null, get the orders from the last 3 months
+                endDate = DateTime.Now;
+                startDate = endDate.AddMonths(-3);
+            }
+            else
+            {
+                // If daterequest is provided, use the specific day provided
+                startDate = new DateTime((int)daterequest.Year, (int)daterequest.Month, (int)daterequest.Day);
+                endDate = startDate;
+            }
+
             var orders = await _uof.GetRepository<BatchOrder>().GetListAsync(
                 predicate: p => p.Batch.BatchMode == BatchMode.SUCCESS
                                 && p.Batch.WarehouseId == warehouseid
-                                && p.Order.DeliveryDate.Value.Month == month
-                                && p.Order.DeliveryDate.Value.Year == year && p.Order.DeliveryDate.Value.Day == day,
+                                && p.Order.ImportedDate >= startDate
+                                && p.Order.ImportedDate <= endDate,
                 include: i => i.Include(q => q.Order).Include(m => m.Batch),
                 orderBy: i => i.OrderBy(i => i.Order.DeliveryDate)
             );
 
             // Calculate the total price directly from the orders
-            decimal totalPrice = (decimal)orders.Sum(order => order.Order.Price);
+            decimal totalPrice = orders.Sum(order => order.Order.Price.HasValue ? order.Order.Price.Value : 0);
 
             return totalPrice;
         }
@@ -356,7 +413,7 @@ namespace WareHouseManagement.Repository.Services.Services
         }
 
         public async Task<IPaginate<GetWarehouseResponse>> GetWarehouses(int page, int size)
-        {
+            {
             var warehouses = await _uof.GetRepository<Warehouse>().GetPagingListAsync(page: page, size: size);
             var paginateResponse = new Paginate<GetWarehouseResponse>
             {

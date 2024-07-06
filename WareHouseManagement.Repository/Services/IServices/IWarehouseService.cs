@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WareHouseManagement.Repository.Dtos.Request.NewFolder;
 using WareHouseManagement.Repository.Dtos.Request.WareHouse;
 using WareHouseManagement.Repository.Dtos.Response.Order;
 using WareHouseManagement.Repository.Dtos.Response.Shipper;
@@ -24,9 +25,9 @@ namespace WareHouseManagement.Repository.Services.IServices
 
         
 
-        Task<decimal> GetRevenueByImprorted(Guid warehouseid, int day, int month, int year);
+        Task<decimal> GetRevenueByImprorted(Guid warehouseid, DateRequest daterequest);
 
-        Task<decimal> GetRevenueBySuccess(Guid warehouseid, int day, int month, int year);
+        Task<decimal> GetRevenueBySuccess(Guid warehouseid, DateRequest daterequest);
 
         Task<IPaginate<GetShipperResponse>> GetShipperByWarehouse(Guid id, int page, int size);
 
@@ -34,9 +35,9 @@ namespace WareHouseManagement.Repository.Services.IServices
 
         Task<bool> ExportFileExcelOrderFail(Guid id);
 
-        Task<int> GetOrderImportedInDate(Guid id, int day, int month, int year);
+        Task<int> GetOrderImportedInDate(Guid id, DateRequest daterequest);
 
-        Task<int> GetOrderExportedInDate(Guid id, int day, int month, int year);
+        Task<int> GetOrderExportedInDate(Guid id, DateRequest daterequest);
 
         Task<decimal> GetRateSuccessOfOrder(Guid id);
 

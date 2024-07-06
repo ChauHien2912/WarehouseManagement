@@ -238,5 +238,24 @@ namespace WareHouseManagement.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> GetOrderOfWarehouseByBatchMode([FromRoute] Guid id, [FromQuery]string BatchMode, [FromQuery] int page = 1, [FromQuery] int size = 10)
+        {
+            try
+            {
+                var result = await _service.GetOrderOfWarehouseByBatchMode(id, BatchMode, page, size);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
