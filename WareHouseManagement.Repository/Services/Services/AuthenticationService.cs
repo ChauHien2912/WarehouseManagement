@@ -61,13 +61,22 @@ namespace WareHouseManagement.Repository.Services.Services
         {
 
             var account = await _uof.GetRepository<Account>().SingleOrDefaultAsync(
-                predicate: u => u.Email == email && u.Password == password,
-                include: x => x.Include(a => a.Role));
-            // return null if user not found
+        predicate: u => u.Email == email,
+        include: x => x.Include(a => a.Role));
+
+            // Return null if user not found
             if (account == null)
             {
                 return null;
             }
+
+            // Kiểm tra mật khẩu băm
+            bool isPasswordValid = BCrypt.Net.BCrypt.Verify(password, account.Password);
+            if (!isPasswordValid)
+            {
+                return null;
+            }
+
             Warehouse warehouse = await _uof.GetRepository<Warehouse>().SingleOrDefaultAsync(predicate: x => x.AccountId == account.Id);
             Shipper shipper = await _uof.GetRepository<Shipper>().SingleOrDefaultAsync(predicate: x => x.AccountId == account.Id);
             Admin admin = await _uof.GetRepository<Admin>().SingleOrDefaultAsync(predicate: x => x.AccountId == account.Id);
@@ -75,10 +84,11 @@ namespace WareHouseManagement.Repository.Services.Services
             {
                 throw new Exception("Không tìm thấy tài khoản");
             }
-            // authentication successful so generate jwt token and refresh token
-            var accessToken = GenerateToken(account.Email, account.Role.RoleName);
+
+            // Authentication successful, so generate JWT token and refresh token
+            var accessToken = GenerateToken(account.Email, account.Role.RoleName, account.Id);
             var refreshToken = GenerateRefreshToken();
-            var newRefrehToken = new RefreshTokenAccount()
+            var newRefreshToken = new RefreshTokenAccount()
             {
                 Id = Guid.NewGuid(),
                 AccessToken = accessToken,
@@ -86,12 +96,13 @@ namespace WareHouseManagement.Repository.Services.Services
                 AccountId = account.Id,
                 Expires = DateTime.UtcNow.AddDays(30),
             };
-            await _uof.GetRepository<RefreshTokenAccount>().InsertAsync(newRefrehToken);
+            await _uof.GetRepository<RefreshTokenAccount>().InsertAsync(newRefreshToken);
             bool isInsert = await _uof.CommitAsync() > 0;
             if (!isInsert)
             {
                 throw new Exception("Cannot insert token to DB");
             }
+
             return new LoginResponse()
             {
                 AccessToken = accessToken,
@@ -114,7 +125,7 @@ namespace WareHouseManagement.Repository.Services.Services
             }
         }
 
-        private string GenerateToken(string username, string roleName)
+        private string GenerateToken(string username, string roleName, Guid accountid)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_config["JWT:Key"]);
@@ -123,8 +134,10 @@ namespace WareHouseManagement.Repository.Services.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
+                    
                     new Claim(ClaimTypes.Name, username),
-                    new Claim(ClaimTypes.Role, roleName)
+                    new Claim(ClaimTypes.Role, roleName),
+                    new Claim("AccountId", accountid.ToString())
                 }),
 
                 Expires = DateTime.UtcNow.AddMinutes(10),
@@ -162,7 +175,7 @@ namespace WareHouseManagement.Repository.Services.Services
                 throw new Exception("Account not found or expired");
             }
 
-            var accessToken = GenerateToken(account.Email, account.RoleId.ToString());
+            var accessToken = GenerateToken(account.Email, account.RoleId.ToString(), account.Id);
             refreshTokenEntity.AccessToken = accessToken;
             _uof.GetRepository<RefreshTokenAccount>().UpdateAsync(refreshTokenEntity);
             bool isUpdate = await _uof.CommitAsync() > 0;

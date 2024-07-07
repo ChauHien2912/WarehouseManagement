@@ -40,3 +40,10 @@ D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\bin\Debug\
 D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\obj\Debug\docker-compose.dcproj.AssemblyReference.cache
 D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache
 D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\obj\Debug\docker-compose.dcproj.CopyComplete
+D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\bin\Debug\ClosedXML.dll
+D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\bin\Debug\DocumentFormat.OpenXml.dll
+D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\bin\Debug\SixLabors.Fonts.dll
+D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\bin\Debug\ExcelNumberFormat.dll
+D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\bin\Debug\System.IO.Packaging.dll
+D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\bin\Debug\Irony.dll
+D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\bin\Debug\XLParser.dll

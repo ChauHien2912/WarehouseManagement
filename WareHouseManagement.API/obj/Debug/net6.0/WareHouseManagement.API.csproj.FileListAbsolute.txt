@@ -85,3 +85,4 @@ D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\WareHouseM
 D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\WareHouseManagement.API\bin\Debug\net6.0\SixLabors.Fonts.dll
 D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\WareHouseManagement.API\bin\Debug\net6.0\System.IO.Packaging.dll
 D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\WareHouseManagement.API\bin\Debug\net6.0\XLParser.dll
+D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\WareHouseManagement.API\bin\Debug\net6.0\BCrypt.Net-Next.dll

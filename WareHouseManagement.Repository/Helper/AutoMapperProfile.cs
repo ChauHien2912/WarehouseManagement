@@ -29,9 +29,17 @@ namespace WareHouseManagement.Repository.Helper
 
             //Account
 
-            CreateMap<Shipper, GetAccountResponse>().ReverseMap();
-            CreateMap<Warehouse, GetAccountResponse>().ReverseMap();
-            CreateMap<Admin, GetAccountResponse>().ReverseMap();
+            CreateMap<Account, GetAccountResponse>()
+            .ForMember(dest => dest.Password, opt => opt.Ignore());
+
+            CreateMap<Shipper, GetAccountResponse>()
+                .ForMember(dest => dest.Password, opt => opt.Ignore());
+
+            CreateMap<Warehouse, GetAccountResponse>()
+                .ForMember(dest => dest.Password, opt => opt.Ignore());
+
+            CreateMap<Admin, GetAccountResponse>()
+                .ForMember(dest => dest.Password, opt => opt.Ignore());
 
             // Role 
             CreateMap<Role, RoleResponse>().ReverseMap();

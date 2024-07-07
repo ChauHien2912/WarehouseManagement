@@ -106,51 +106,59 @@ namespace WareHouseManagement.Repository.Services.Services
             {
                 throw new Exception("Role không tồn tại");
             }
-
+            response.Password = null;
             return response;
         }
 
         public async Task<CreateAccountResponse> RegisterAccount(CreateAccountRequest createAccountRequest)
         {
-            CreateAccountResponse createAccountResponse = new CreateAccountResponse();
-            var role = await _uof.GetRepository<Role>().SingleOrDefaultAsync(predicate: x => x.RoleName.Equals(createAccountRequest.RoleName));
-            if (role == null)
+            try
             {
-                throw new Exception("Role not found");
-            }
-            var userName = await _uof.GetRepository<Account>().SingleOrDefaultAsync(predicate: x => x.Email.Equals(createAccountRequest.Email));
-            if (userName != null)
-            {
-                throw new Exception("Username đã tồn tại!");
-            }
-            var account = _mapper.Map<Account>(createAccountRequest);
-            if (RoleEnum.Shipper.ToString().Equals(createAccountRequest.RoleName))
-            {
-                var userInfor = _mapper.Map<Shipper>(createAccountRequest);
-                account.Id = Guid.NewGuid();
-                account.RoleId = role.Id;
-                account.IsActive = true;
-                userInfor.Id = Guid.NewGuid();
-                userInfor.AccountId = account.Id;
-                await _uof.GetRepository<Shipper>().InsertAsync(userInfor);
-            }
-            else if (RoleEnum.Warehouse.ToString().Equals(createAccountRequest.RoleName))
-            {
-                var warehouse = _mapper.Map<Warehouse>(createAccountRequest);
-                account.Id = Guid.NewGuid();
-                account.RoleId = role.Id;
-                account.IsActive = true;
-                warehouse.AccountId = account.Id;
-                warehouse.Id = Guid.NewGuid();
-                warehouse.Location = createAccountRequest.Location;
-                warehouse.FullName = createAccountRequest.FullName;
-                warehouse.Phone = createAccountRequest.Phone;
-                await _uof.GetRepository<Warehouse>().InsertAsync(warehouse);
-            }
-            await _uof.GetRepository<Account>().InsertAsync(account);
-            await _uof.CommitAsync();
+                CreateAccountResponse createAccountResponse = new CreateAccountResponse();
+                var role = await _uof.GetRepository<Role>().SingleOrDefaultAsync(predicate: x => x.RoleName.Equals(createAccountRequest.RoleName));
+                if (role == null)
+                {
+                    throw new Exception("Role not found");
+                }
+                var userName = await _uof.GetRepository<Account>().SingleOrDefaultAsync(predicate: x => x.Email.Equals(createAccountRequest.Email));
+                if (userName != null)
+                {
+                    throw new Exception("Username đã tồn tại!");
+                }
+                var hashedPassword = BCrypt.Net.BCrypt.HashPassword(createAccountRequest.Password);
+                var account = _mapper.Map<Account>(createAccountRequest);
+                account.Password = hashedPassword;
+                if (RoleEnum.Shipper.ToString().Equals(createAccountRequest.RoleName))
+                {
+                    var userInfor = _mapper.Map<Shipper>(createAccountRequest);
+                    account.Id = Guid.NewGuid();
+                    account.RoleId = role.Id;
+                    account.IsActive = true;
+                    userInfor.Id = Guid.NewGuid();
+                    userInfor.AccountId = account.Id;
+                    await _uof.GetRepository<Shipper>().InsertAsync(userInfor);
+                }
+                else if (RoleEnum.Warehouse.ToString().Equals(createAccountRequest.RoleName))
+                {
+                    var warehouse = _mapper.Map<Warehouse>(createAccountRequest);
+                    account.Id = Guid.NewGuid();
+                    account.RoleId = role.Id;
+                    account.IsActive = true;
+                    warehouse.AccountId = account.Id;
+                    warehouse.Id = Guid.NewGuid();
+                    warehouse.Location = createAccountRequest.Location;
+                    warehouse.FullName = createAccountRequest.FullName;
+                    warehouse.Phone = createAccountRequest.Phone;
+                    await _uof.GetRepository<Warehouse>().InsertAsync(warehouse);
+                }
+                await _uof.GetRepository<Account>().InsertAsync(account);
+                await _uof.CommitAsync();
 
-            return _mapper.Map(createAccountRequest, createAccountResponse);
+                return _mapper.Map(createAccountRequest, createAccountResponse);
+            } catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<bool> UpdateAccount(Guid id, UpdateAccountRequest updateAccountRequest)
