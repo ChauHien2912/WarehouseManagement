@@ -62,6 +62,13 @@ namespace WareHouseManagement.Repository.Services.Services
             {
                 throw new Exception("Tài khoản không tồn tại");
             }
+
+            // Create the response and map the basic account fields
+            response = _mapper.Map<GetAccountResponse>(account);
+
+            // Set the RoleName field
+            response.RoleName = account.Role.RoleName;
+
             if (account.Role.RoleName.Equals(RoleEnum.Shipper.ToString()))
             {
                 Shipper shipper = await _uof.GetRepository<Shipper>()
@@ -70,7 +77,8 @@ namespace WareHouseManagement.Repository.Services.Services
                 {
                     throw new Exception("Tài khoản không tồn tại");
                 }
-                response = _mapper.Map<GetAccountResponse>(shipper);
+                response.FullName = shipper.FullName;
+                response = _mapper.Map(shipper, response); // map additional fields from shipper
             }
             else if (account.Role.RoleName.Equals(RoleEnum.Warehouse.ToString()))
             {
@@ -80,13 +88,25 @@ namespace WareHouseManagement.Repository.Services.Services
                 {
                     throw new Exception("Tài khoản không tồn tại");
                 }
-                response = _mapper.Map<GetAccountResponse>(warehouse);
+                response.FullName = warehouse.FullName;
+                response = _mapper.Map(warehouse, response);
+            }// map additional fields from warehouse
+            else if (account.Role.RoleName.Equals(RoleEnum.Admin.ToString()))
+            {
+                Admin  admin = await _uof.GetRepository<Admin>()
+                                    .SingleOrDefaultAsync(predicate: x => x.AccountId == account.Id);
+                if (admin == null)
+                {
+                    throw new Exception("Tài khoản không tồn tại");
+                }
+                
+                response = _mapper.Map(admin, response); // map additional fields from warehouse
             }
             else
             {
                 throw new Exception("Role không tồn tại");
             }
-            response = _mapper.Map(account, response);
+
             return response;
         }
 

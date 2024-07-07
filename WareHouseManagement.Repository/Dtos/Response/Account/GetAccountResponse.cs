@@ -9,22 +9,15 @@ namespace WareHouseManagement.Repository.Dtos.Response.User
 {
     public class GetAccountResponse
     {
-        public GetAccountResponse() { }
-
-        public GetAccountResponse(Guid id, string? email, string? password, Guid? roleId, bool? isActive)
-        {
-            Id = id;
-            Email = email;
-            Password = password;
-            RoleId = roleId;
-            IsActive = isActive;
-        }
+       
 
         public Guid Id { get; set; }
         public string? Email { get; set; }
         public string? Password { get; set; }
-        public Guid? RoleId { get; set; }
+        public string? RoleName { get; set; }
         public bool? IsActive { get; set; }
+
+        public string? FullName { get; set; }
 
     }
 }
