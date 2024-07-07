@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WareHouseManagement.API.Constant;
 using WareHouseManagement.Repository.Dtos.Request.Account;
+using WareHouseManagement.Repository.Entities;
+using WareHouseManagement.Repository.Repository;
 using WareHouseManagement.Repository.Services.IServices;
 
 namespace WareHouseManagement.API.Controllers
@@ -12,9 +14,12 @@ namespace WareHouseManagement.API.Controllers
     public class AccountController : BaseController
     {
         private IAccountService _accountService;
-        public AccountController(IMapper mapper, IAccountService accountService) : base(mapper)
+
+        private readonly IUnitOfWork _uof;
+        public AccountController(IMapper mapper, IAccountService accountService, IUnitOfWork uof) : base(mapper)
         {
             _accountService = accountService;
+            _uof = uof;
         }
 
         [HttpPost]
@@ -113,5 +118,32 @@ namespace WareHouseManagement.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+
+        [HttpPost("hash-passwords")]
+        public async Task<IActionResult> HashPasswords()
+        {
+            await HashPasswordsForAllAccounts();
+            return Ok("All passwords have been hashed.");
+        }
+
+        private async Task HashPasswordsForAllAccounts()
+        {
+            var accounts = await _uof.GetRepository<Account>().GetListAsync();
+
+            foreach (var account in accounts)
+            {
+                // Kiểm tra nếu mật khẩu chưa được băm (giả sử mật khẩu chưa băm không chứa ký tự '$')
+                if (!string.IsNullOrEmpty(account.Password) && !account.Password.StartsWith("$2"))
+                {
+                    var hashedPassword = BCrypt.Net.BCrypt.HashPassword(account.Password);
+                    account.Password = hashedPassword;
+                    _uof.GetRepository<Account>().UpdateAsync(account);
+                }
+            }
+
+            await _uof.CommitAsync();
+        }
+
     }
 }

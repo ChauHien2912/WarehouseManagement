@@ -47,3 +47,4 @@ D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\bin\Debug\
 D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\bin\Debug\System.IO.Packaging.dll
 D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\bin\Debug\Irony.dll
 D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\bin\Debug\XLParser.dll
+D:\FPT\Sum2024\SWD392_ReLearn\WarehouseManagement\WarehouseManagement\bin\Debug\BCrypt.Net-Next.dll

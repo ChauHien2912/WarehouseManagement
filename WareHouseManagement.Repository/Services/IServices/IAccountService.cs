@@ -17,5 +17,7 @@ namespace WareHouseManagement.Repository.Services.IServices
         Task<GetAccountResponse> GetAccountById(Guid id);
 
         Task<bool> UpdateAccount(Guid id, UpdateAccountRequest updateAccountRequest);
+
+        
     }
 }
