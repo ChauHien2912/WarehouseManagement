@@ -226,7 +226,7 @@ namespace WareHouseManagement.Repository.Services.Services
             {
                 throw new Exception("Not Found Warehouse");
             }
-            var orders = await _uof.GetRepository<BatchOrder>().GetPagingListAsync(predicate: p => p.Batch.BatchMode == BatchMode.SUCCESS && p.Batch.WarehouseId == warehouseid,
+            var orders = await _uof.GetRepository<BatchOrder>().GetPagingListAsync(predicate: p => p.Status == BatchMode.SUCCESS && p.Batch.WarehouseId == warehouseid,
                                 include: i => i.Include(q => q.Order).Include(m => m.Batch),
                                 orderBy: i => i.OrderBy(i => i.Order.DeliveryDate)
                                 );
@@ -248,13 +248,13 @@ namespace WareHouseManagement.Repository.Services.Services
             {
                 throw new Exception("Not Found Warehouse");
             }
-            var totalOrders = await _uof.GetRepository<BatchOrder>().GetListAsync(predicate: p => p.Batch.WarehouseId == warehouseId);
+            var totalOrders = await _uof.GetRepository<BatchOrder>().GetListAsync(predicate: p => p.Shipper.WarehouseId == warehouseId);
             return totalOrders.Count();
         }
 
         public async Task<decimal> GetRateFailOfOrder(Guid id)
         {
-            var orders = await _uof.GetRepository<BatchOrder>().GetListAsync(predicate: p => p.Batch.BatchMode == BatchMode.FAIL && p.Batch.WarehouseId == id,
+            var orders = await _uof.GetRepository<BatchOrder>().GetListAsync(predicate: p => p.Status == BatchMode.FAIL && p.Batch.WarehouseId == id,
                                 include: i => i.Include(q => q.Order).Include(m => m.Batch),
                                 orderBy: i => i.OrderBy(i => i.Order.DeliveryDate)
                                 );
@@ -273,7 +273,7 @@ namespace WareHouseManagement.Repository.Services.Services
 
         public async  Task<decimal> GetRateSuccessOfOrder(Guid id)
         {
-            var orders = await _uof.GetRepository<BatchOrder>().GetListAsync(predicate: p => p.Batch.BatchMode == BatchMode.SUCCESS && p.Batch.WarehouseId == id,
+            var orders = await _uof.GetRepository<BatchOrder>().GetListAsync(predicate: p => p.Status == BatchMode.SUCCESS && p.Batch.WarehouseId == id,
                                 include: i => i.Include(q => q.Order).Include(m => m.Batch),
                                 orderBy: i => i.OrderBy(i => i.Order.DeliveryDate)
                                 );
@@ -350,7 +350,7 @@ namespace WareHouseManagement.Repository.Services.Services
             }
 
             var orders = await _uof.GetRepository<BatchOrder>().GetListAsync(
-                predicate: p => p.Batch.BatchMode == BatchMode.SUCCESS
+                predicate: p => p.Status == BatchMode.SUCCESS
                                 && p.Batch.WarehouseId == warehouseid
                                 && p.Order.ImportedDate >= startDate
                                 && p.Order.ImportedDate <= endDate,

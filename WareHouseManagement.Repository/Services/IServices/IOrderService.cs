@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WareHouseManagement.Repository.Dtos.Request.Order;
+using WareHouseManagement.Repository.Dtos.Request.WareHouse;
 using WareHouseManagement.Repository.Dtos.Response.Order;
 using WareHouseManagement.Repository.Specifications;
 
@@ -18,7 +19,7 @@ namespace WareHouseManagement.Repository.Services.IServices
 
         Task<GetOrderResponse> GetOrderById(Guid id);
 
-        Task<int> UpdataBatchModeByWarehouse(Guid warehouseid);
+        Task<int> UpdataBatchModeByWarehouse(UpdateBatchMode reqest);
 
         Task<IPaginate<GetOrderResponse>> GetOrderByShipper(Guid shipperid, int page, int size);
 

@@ -41,6 +41,7 @@ namespace WareHouseManagement.Repository.Services.Services
             {
                 Role role = new Role
                 {
+                    Id = Guid.NewGuid(),
                     RoleName = request.RoleName
                 };
 

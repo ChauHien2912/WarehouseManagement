@@ -38,7 +38,7 @@ namespace WareHouseManagement.API.Controllers
 
         [HttpGet]
         [Route("{warehouseid:Guid}")]
-        public async Task<IActionResult> GetShippers([FromRoute]Guid warehouseid,int page, int size)
+        public async Task<IActionResult> GetShippers([FromRoute]Guid warehouseid,[FromQuery]int page = 1,[FromQuery] int size = 10)
         {
             try
             {

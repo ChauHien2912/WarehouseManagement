@@ -60,7 +60,7 @@ namespace WareHouseManagement.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetWarehouses(int page, int size)
+        public async Task<IActionResult> GetWarehouses([FromQuery] int page = 1, [FromQuery] int size = 10)
         {
             try
             {

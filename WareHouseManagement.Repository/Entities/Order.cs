@@ -17,6 +17,8 @@ namespace WareHouseManagement.Repository.Entities
         public decimal? Price { get; set; }
         public Guid? WarehouseId { get; set; }
         public DateTime? DeliveryDate { get; set; }
+        public string? Name { get; set; }
+        public string? Phone { get; set; }
         public string? Img { get; set; }
         public string? Address { get; set; }
         public DateTime? ImportedDate { get; set; }

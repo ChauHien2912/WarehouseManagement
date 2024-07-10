@@ -7,7 +7,7 @@ namespace WareHouseManagement.Repository.Entities
     {
         public Shipper()
         {
-            Batches = new HashSet<Batch>();
+            BatchOrders = new HashSet<BatchOrder>();
         }
 
         public Guid Id { get; set; }
@@ -21,6 +21,6 @@ namespace WareHouseManagement.Repository.Entities
 
         public virtual Account? Account { get; set; }
         public virtual Warehouse? Warehouse { get; set; }
-        public virtual ICollection<Batch> Batches { get; set; }
+        public virtual ICollection<BatchOrder> BatchOrders { get; set; }
     }
 }

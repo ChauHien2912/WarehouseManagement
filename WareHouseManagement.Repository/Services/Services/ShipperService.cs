@@ -57,8 +57,8 @@ namespace WareHouseManagement.Repository.Services.Services
 
         public async Task<IPaginate<GetOrderResponse>> GetOrderOfShipperByImported(Guid id, string Batchmode,  int page, int size)
         {
-            var orders = await _uof.GetRepository<BatchOrder>().GetPagingListAsync(predicate: p => p.Batch.ShipperId == id
-                        && p.Batch.BatchMode == Batchmode,
+            var orders = await _uof.GetRepository<BatchOrder>().GetPagingListAsync(predicate: p => p.ShipperId == id
+                        && p.Status == Batchmode,
                         include: i => i.Include(d => d.Order),
                         orderBy: o => o.OrderBy(m => m.Order.ImportedDate)
                         );
@@ -92,9 +92,9 @@ namespace WareHouseManagement.Repository.Services.Services
         public async Task<IPaginate<GetShipperResponse>> GetShippers(Guid warehouseid,int page, int size)
         {
             var shippers = await _uof.GetRepository<Shipper>().GetPagingListAsync(
-                predicate: p => p.Id == warehouseid,
-                page: page, size: size,
-                include: i => i.Include(p => p.Warehouse)
+                predicate: p => p.WarehouseId == warehouseid,
+                page: page, size: size
+                
                 );
             var paginateResponse = new Paginate<GetShipperResponse>
             {

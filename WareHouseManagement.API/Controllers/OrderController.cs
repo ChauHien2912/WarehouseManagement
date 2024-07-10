@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WareHouseManagement.API.Constant;
 using WareHouseManagement.Repository.Dtos.Request.Order;
+using WareHouseManagement.Repository.Dtos.Request.WareHouse;
 using WareHouseManagement.Repository.Services.IServices;
 
 namespace WareHouseManagement.API.Controllers
@@ -73,12 +74,12 @@ namespace WareHouseManagement.API.Controllers
         }
 
         [HttpPut]
-        [Route("{warehouseid:Guid}")]
-        public async Task<IActionResult> UpdateBatchModeByWarehouse([FromRoute] Guid warehouseid)
+        
+        public async Task<IActionResult> UpdateBatchModeByWarehouse([FromBody] UpdateBatchMode request)
         {
             try
             {
-                var result = await _service.UpdataBatchModeByWarehouse(warehouseid);
+                var result = await _service.UpdataBatchModeByWarehouse(request);
                 if (result == null)
                 {
                     return NotFound();
