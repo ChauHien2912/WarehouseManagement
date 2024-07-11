@@ -10,6 +10,7 @@ using WareHouseManagement.Repository.Dtos.Request.User;
 using WareHouseManagement.Repository.Dtos.Request.WareHouse;
 using WareHouseManagement.Repository.Dtos.Response.Account;
 using WareHouseManagement.Repository.Dtos.Response.Authen;
+using WareHouseManagement.Repository.Dtos.Response.Batch;
 using WareHouseManagement.Repository.Dtos.Response.Order;
 using WareHouseManagement.Repository.Dtos.Response.Role;
 using WareHouseManagement.Repository.Dtos.Response.Shipper;
@@ -95,7 +96,9 @@ namespace WareHouseManagement.Repository.Helper
             .ForMember(dest => dest.BatchMode, opt => opt.MapFrom(src => src.Batch.BatchMode))
             .ForMember(dest => dest.BatchId, opt => opt.MapFrom(src => src.BatchId));
 
+            // batch
 
+            CreateMap<Batch, GetBtachResponse>().ReverseMap();
 
         }
     }

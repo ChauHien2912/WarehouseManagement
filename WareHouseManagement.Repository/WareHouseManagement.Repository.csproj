@@ -9,10 +9,13 @@
   <ItemGroup>
     <Compile Remove="Dtos\Request\Shipper\**" />
     <Compile Remove="Dtos\Request\Truck\**" />
+    <Compile Remove="Dtos\Response\Truck\**" />
     <EmbeddedResource Remove="Dtos\Request\Shipper\**" />
     <EmbeddedResource Remove="Dtos\Request\Truck\**" />
+    <EmbeddedResource Remove="Dtos\Response\Truck\**" />
     <None Remove="Dtos\Request\Shipper\**" />
     <None Remove="Dtos\Request\Truck\**" />
+    <None Remove="Dtos\Response\Truck\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,11 +38,6 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Dtos\Response\Batch\" />
-    <Folder Include="Dtos\Response\Truck\" />
   </ItemGroup>
 
 </Project>

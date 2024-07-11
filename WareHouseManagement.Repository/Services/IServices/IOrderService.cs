@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WareHouseManagement.Repository.Dtos.Request.Order;
 using WareHouseManagement.Repository.Dtos.Request.WareHouse;
+using WareHouseManagement.Repository.Dtos.Response.Batch;
 using WareHouseManagement.Repository.Dtos.Response.Order;
 using WareHouseManagement.Repository.Specifications;
 
@@ -33,6 +34,10 @@ namespace WareHouseManagement.Repository.Services.IServices
         Task<IPaginate<GetOrderResponse>> GetOrderTruckIn(int page, int size);
 
         Task<IPaginate<GetOrderResponse>> GetOrderOfWarehouseByBatchMode(Guid warehouseid, string BatchMode, int page, int size);
+
+        Task<IPaginate<GetOrderResponse>> GetListOrderByBatchId(Guid id, int page, int size);
+
+        Task<IPaginate<GetBtachResponse>> GetBatchByWarehouseId(Guid id, int page, int size);
 
     }
 }

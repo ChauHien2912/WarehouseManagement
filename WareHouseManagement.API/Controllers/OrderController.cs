@@ -111,6 +111,44 @@ namespace WareHouseManagement.API.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> GetListBatchByWarehouse([FromRoute] Guid id, int page = 1, int size = 10)
+        {
+            try
+            {
+                var result = await _service.GetBatchByWarehouseId(id, page, size);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> GetListOrdersByBatch([FromRoute] Guid id, int page = 1, int size = 10)
+        {
+            try
+            {
+                var result = await _service.GetListOrderByBatchId(id, page, size);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> UpdateBatchModebyShipper([FromForm]UpdateBactchModeRequest request)
         {

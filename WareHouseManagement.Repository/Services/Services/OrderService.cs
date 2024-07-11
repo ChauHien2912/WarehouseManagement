@@ -16,6 +16,7 @@ using WareHouseManagement.Repository.Repository;
 using WareHouseManagement.Repository.Services.IServices;
 using WareHouseManagement.Repository.Specifications;
 using WareHouseManagement.Repository.Dtos.Request.WareHouse;
+using WareHouseManagement.Repository.Dtos.Response.Batch;
 
 namespace WareHouseManagement.Repository.Services.Services
 {
@@ -120,6 +121,40 @@ namespace WareHouseManagement.Repository.Services.Services
             {
                 return false;
             }
+        }
+
+        public async Task<IPaginate<GetBtachResponse>> GetBatchByWarehouseId(Guid id, int page, int size)
+        {
+            var batchs = await _uow.GetRepository<Batch>().GetPagingListAsync(predicate: p => p.WarehouseId == id,
+                        page: page, size: size, orderBy: o => o.OrderBy( p => p.DateInported)
+                        );
+            var batchResponses = new Paginate<GetBtachResponse>()
+            {
+                Page = batchs.Page,
+                Size = batchs.Size,
+                Total = batchs.Total,
+                TotalPages = batchs.TotalPages,
+                Items = _mapper.Map<IList<GetBtachResponse>>(batchs.Items),
+            };
+
+            return batchResponses;
+        }
+
+        public async Task<IPaginate<GetOrderResponse>> GetListOrderByBatchId(Guid id, int page, int size)
+        {
+            var orders = await _uow.GetRepository<BatchOrder>().GetPagingListAsync(predicate: p => p.BatchId == id,
+                        page: page, size:size, include: i => i.Include( m => m.Order)
+                );
+            var orderResponses = new Paginate<GetOrderResponse>()
+            {
+                Page = orders.Page,
+                Size = orders.Size,
+                Total = orders.Total,
+                TotalPages = orders.TotalPages,
+                Items = _mapper.Map<IList<GetOrderResponse>>(orders.Items),
+            };
+
+            return orderResponses;
         }
 
         public async Task<GetOrderResponse> GetOrderById(Guid id)
