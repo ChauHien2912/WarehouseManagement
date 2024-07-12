@@ -11,7 +11,7 @@ namespace WareHouseManagement.Repository.Dtos.Request.Order
     {
         public IFormFile? image {  get; set; }
 
-        public Guid? BatchOrderId {  get; set; }
+        public Guid? BatchId {  get; set; }
 
         public string Status { get; set; }
     }
