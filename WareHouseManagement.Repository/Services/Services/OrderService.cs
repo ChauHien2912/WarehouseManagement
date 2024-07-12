@@ -123,9 +123,9 @@ namespace WareHouseManagement.Repository.Services.Services
             }
         }
 
-        public async Task<IPaginate<GetBtachResponse>> GetBatchByWarehouseId(Guid id, int page, int size)
+        public async Task<IPaginate<GetBtachResponse>> GetBatchByWarehouseId(Guid id, string batchmode, int page, int size)
         {
-            var batchs = await _uow.GetRepository<Batch>().GetPagingListAsync(predicate: p => p.WarehouseId == id,
+            var batchs = await _uow.GetRepository<Batch>().GetPagingListAsync(predicate: p => p.WarehouseId == id && p.BatchMode == batchmode,
                         page: page, size: size, orderBy: o => o.OrderBy( p => p.DateInported)
                         );
             var batchResponses = new Paginate<GetBtachResponse>()

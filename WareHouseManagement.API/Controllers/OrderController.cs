@@ -113,11 +113,11 @@ namespace WareHouseManagement.API.Controllers
 
         [HttpGet]
         [Route("{id:Guid}")]
-        public async Task<IActionResult> GetListBatchByWarehouse([FromRoute] Guid id, int page = 1, int size = 10)
+        public async Task<IActionResult> GetListBatchByWarehouse([FromRoute] Guid id,[FromQuery]string batchmode, int page = 1, int size = 10)
         {
             try
             {
-                var result = await _service.GetBatchByWarehouseId(id, page, size);
+                var result = await _service.GetBatchByWarehouseId(id, batchmode,page, size);
                 if (result == null)
                 {
                     return NotFound();

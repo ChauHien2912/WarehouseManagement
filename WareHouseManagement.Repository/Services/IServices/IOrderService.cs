@@ -37,7 +37,7 @@ namespace WareHouseManagement.Repository.Services.IServices
 
         Task<IPaginate<GetOrderResponse>> GetListOrderByBatchId(Guid id, int page, int size);
 
-        Task<IPaginate<GetBtachResponse>> GetBatchByWarehouseId(Guid id, int page, int size);
+        Task<IPaginate<GetBtachResponse>> GetBatchByWarehouseId(Guid id, string batchmode, int page, int size);
 
     }
 }
