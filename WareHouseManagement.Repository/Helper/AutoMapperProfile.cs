@@ -93,7 +93,7 @@ namespace WareHouseManagement.Repository.Helper
             .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Order.Address))
             .ForMember(dest => dest.CusName, opt => opt.MapFrom(src => src.Order.Name))
             .ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => src.Order.Phone))
-            .ForMember(dest => dest.BatchMode, opt => opt.MapFrom(src => src.Batch.BatchMode))
+            .ForMember(dest => dest.BatchOrderId, opt => opt.MapFrom(src => src.Id))
             .ForMember(dest => dest.BatchId, opt => opt.MapFrom(src => src.BatchId));
 
             // batch

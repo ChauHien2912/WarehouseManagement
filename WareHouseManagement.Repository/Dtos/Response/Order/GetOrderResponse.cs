@@ -24,10 +24,13 @@ namespace WareHouseManagement.Repository.Dtos.Response.Order
         public string? Status { get; set; }
 
         // Additional properties for Batch information
-        public string? BatchMode { get; set; }
         public Guid? ShipperId { get; set; }
+
+        public Guid? BatchOrderId { get; set; }
+
         public Guid? BatchId { get; set; }
 
+         
 
     }
 }
