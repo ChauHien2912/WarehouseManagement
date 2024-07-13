@@ -39,5 +39,7 @@ namespace WareHouseManagement.Repository.Services.IServices
 
         Task<IPaginate<GetBtachResponse>> GetBatchByWarehouseId(Guid id, string batchmode, int page, int size);
 
+        
+
     }
 }

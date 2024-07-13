@@ -394,7 +394,7 @@ namespace WareHouseManagement.Repository.Services.Services
         {
 
             var batchorder = await _uow.GetRepository<BatchOrder>().SingleOrDefaultAsync(
-                predicate: p => p.BatchId == request.BatchId);
+                predicate: p => p.Id == request.BatchOrderId);
             var batch = await _uow.GetRepository<Batch>().SingleOrDefaultAsync(
                         predicate: p => p.Id == batchorder.BatchId
                         );
