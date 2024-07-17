@@ -89,10 +89,11 @@ namespace WareHouseManagement.Repository.Helper
             .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Order.Price))
             .ForMember(dest => dest.WarehouseId, opt => opt.MapFrom(src => src.Order.WarehouseId))
             .ForMember(dest => dest.DeliveryDate, opt => opt.MapFrom(src => src.Order.DeliveryDate))
-            .ForMember(dest => dest.Img, opt => opt.MapFrom(src => src.Order.Img))
+            .ForMember(dest => dest.Img_Order, opt => opt.MapFrom(src => src.Order.Img))
             .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Order.Address))
             .ForMember(dest => dest.CusName, opt => opt.MapFrom(src => src.Order.Name))
             .ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => src.Order.Phone))
+            .ForMember(dest => dest.Img_Shipper, opt => opt.MapFrom(src => src.Img))
             .ForMember(dest => dest.BatchOrderId, opt => opt.MapFrom(src => src.Id))
             .ForMember(dest => dest.BatchId, opt => opt.MapFrom(src => src.BatchId));
 

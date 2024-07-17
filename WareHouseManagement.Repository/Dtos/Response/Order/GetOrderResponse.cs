@@ -14,13 +14,16 @@ namespace WareHouseManagement.Repository.Dtos.Response.Order
         public decimal? Price { get; set; }
         public Guid? WarehouseId { get; set; }
         public DateTime? DeliveryDate { get; set; }
-        public string? Img { get; set; }
+        public string? Img_Order { get; set; }
+
+
 
         public string? Address { get; set; }
         public string? CusName { get; set; }
 
         public string? PhoneNumber { get; set; }
 
+        public string? Img_Shipper { get; set; }
         public string? Status { get; set; }
 
         // Additional properties for Batch information
